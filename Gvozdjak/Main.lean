@@ -41,4 +41,7 @@ theorem gvozdjak : GvozdjakConjecture := by
 
 end Gvozdjak
 
+-- The build fails if the proof ever depends on `sorry` or on any axiom beyond Lean's standard three.
+/-- info: 'Gvozdjak.gvozdjak' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
 #print axioms Gvozdjak.gvozdjak
