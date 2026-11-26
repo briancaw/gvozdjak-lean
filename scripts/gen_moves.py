@@ -1,6 +1,8 @@
 import ast, sys
 sigs=[ast.literal_eval(l) for l in open(sys.argv[1]).read().split("\n") if l.strip()]
 assert len(sigs)==15
+ONLY=[int(x) for x in sys.argv[3].split(',')] if len(sys.argv)>3 else list(range(1,16))
+HB=sys.argv[4] if len(sys.argv)>4 else '1000000'
 def plus(xs): 
     xs=[x for x in xs if x!="0"]
     return " + ".join(xs) if xs else "0"
@@ -78,6 +80,19 @@ theorem admissible_iff_admL {a b n : Nat} : Admissible a b n ↔ AdmL a b n := b
   generalize n * (n + 1) / 2 = T at h ⊢
   omega
 
+theorem ind_one {s k x : Nat} (h1 : s ≤ x) (h2 : x < s + k) : ind s k x = 1 := by
+  unfold ind; omega
+
+theorem ind_zero_lt {s k x : Nat} (h : x < s) : ind s k x = 0 := by
+  unfold ind; omega
+
+theorem ind_zero_ge {s k x : Nat} (h : s + k ≤ x) : ind s k x = 0 := by
+  unfold ind; omega
+
+/-- Evaluate every interval indicator in the goal, once the position of `x` is known. -/
+macro "ind_region" : tactic =>
+  `(tactic| (simp (disch := omega) only [ind_one, ind_zero_lt, ind_zero_ge] <;> omega))
+
 /-- A graceful labeling can be translated to start at any `lo`. -/
 theorem core_of {s e N : Nat} (h : ∃ p, IsGraceful s e N p) (lo : Nat) :
     ∃ p, Spec (lo + s) (lo + e) (ind lo (N + 1)) (ind 1 N) p := by
@@ -90,13 +105,14 @@ theorem core_of {s e N : Nat} (h : ∃ p, IsGraceful s e N p) (lo : Nat) :
 def chain(B):
     s=""
     for i,b in enumerate(B):
-        s+=f"    rcases Nat.lt_or_ge x ({b}) with hx{i} | hx{i}\n    · omega\n"
-    s+="    omega\n"
+        s+=f"    rcases Nat.lt_or_ge x ({b}) with hx{i} | hx{i}\n    · ind_region\n"
+    s+="    ind_region\n"
     return s
 for j,sig in enumerate(sigs,1):
+    if j not in ONLY: continue
     I=info(sig); P=" ".join(I['params'])
     out.append(f"/-- Constraints of move {j}: layers {', '.join(I['types'][:-1])}. -/\ndef C{j} (n a b {P} : Nat) : Prop :=\n  "+" ∧\n  ".join(I['cons'])+"\n")
-    L=[f"set_option maxHeartbeats 1000000 in\ntheorem move{j} {{n a b {P} : Nat}} (h : C{j} n a b {P})\n    (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by",
+    L=[f"set_option maxHeartbeats {HB} in\ntheorem move{j} {{n a b {P} : Nat}} (h : C{j} n a b {P})\n    (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by",
        f"  unfold C{j} at h",
        "  obtain ⟨"+", ".join(f"c{q}" for q in range(len(I['cons'])))+"⟩ := h"]
     r=I['r']; names={}
@@ -114,13 +130,15 @@ for j,sig in enumerate(sigs,1):
     L.append(f"  refine ⟨_, isGraceful_iff_spec.mpr ({ch}.congr (by omega) (by omega) ?_ ?_)⟩")
     nl=r-1
     Bv=[I['Lo'][i] for i in range(1,r)]+[I['Hi'][i] for i in range(nl-1,-1,-1)]+["n + 1"]
-    L.append("  · intro x\n    simp only [ind]\n"+chain(Bv).rstrip())
+    L.append("  · intro x\n    try dsimp only\n"+chain(Bv).rstrip())
     Bd=["1"]
     for i in range(nl-1,-1,-1): Bd+=[I['g'][i], f"{I['g'][i]} + 1"]
     Bd.append("n + 1")
-    L.append("  · intro x\n    simp only [ind, adiff]\n"+chain(Bd).rstrip())
+    L.append("  · intro x\n    simp only [adiff]\n"+chain(Bd).rstrip())
     out.append("\n".join(L)+"\n")
 # Red
+if len(ONLY)<15:
+    out.append("\nend Gvozdjak\n"); open(sys.argv[2],"w").write("\n".join(out)); sys.exit(0)
 out.append("/-- `(a, b; n)` reduces to a smaller admissible triple by one of the fifteen moves. -/\ninductive Red (n a b : Nat) : Prop")
 for j,sig in enumerate(sigs,1):
     I=info(sig); P=" ".join(I['params'])

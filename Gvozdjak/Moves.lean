@@ -74,7 +74,7 @@ def C1 (n a b k0 A0 B0 H0 N s e : Nat) : Prop :=
   b = H0 + B0 ∧
   k0 + e + ((N + 1)) = H0 + A0
 
-set_option maxHeartbeats 200000 in
+set_option maxHeartbeats 4000000 in
 theorem move1 {n a b k0 A0 B0 H0 N s e : Nat} (h : C1 n a b k0 A0 B0 H0 N s e)
     (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by
   unfold C1 at h
@@ -85,6 +85,47 @@ theorem move1 {n a b k0 A0 B0 H0 N s e : Nat} (h : C1 n a b k0 A0 B0 H0 N s e)
   · intro x
     try dsimp only
     rcases Nat.lt_or_ge x (k0) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x (H0) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx2 | hx2
+    · ind_region
+    ind_region
+  · intro x
+    simp only [adiff]
+    rcases Nat.lt_or_ge x (1) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1) + 1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx3 | hx3
+    · ind_region
+    ind_region
+
+/-- Constraints of move 2: layers EL. -/
+def C2 (n a b k0 A0 B0 H0 N s e : Nat) : Prop :=
+  1 ≤ k0 ∧
+  A0 + B0 = k0 ∧
+  A0 ≠ B0 ∧
+  1 ≤ N ∧
+  H0 + (k0) = n + 1 ∧
+  n + 1 = (2 * k0 + 1) + (N + 1) ∧
+  a = 0 + A0 ∧
+  b = (k0 + 1) + e ∧
+  0 + B0 + ((N + 1)) = (k0 + 1) + s
+
+set_option maxHeartbeats 4000000 in
+theorem move2 {n a b k0 A0 B0 H0 N s e : Nat} (h : C2 n a b k0 A0 B0 H0 N s e)
+    (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by
+  unfold C2 at h
+  obtain ⟨c0, c1, c2, c3, c4, c5, c6, c7, c8⟩ := h
+  obtain ⟨p0, h0⟩ := hasEL' (κ := k0) (A := A0) (B := B0) (lo := 0) (hi := H0) (g := (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p1, h1⟩ := core_of hc ((k0 + 1))
+  refine ⟨_, isGraceful_iff_spec.mpr ((h0.append h1).congr (by omega) (by omega) ?_ ?_)⟩
+  · intro x
+    try dsimp only
+    rcases Nat.lt_or_ge x ((k0 + 1)) with hx0 | hx0
     · ind_region
     rcases Nat.lt_or_ge x (H0) with hx1 | hx1
     · ind_region
@@ -120,7 +161,7 @@ def C3 (n a b k0 A0 B0 H0 k1 A1 B1 H1 N s e : Nat) : Prop :=
   k0 + k1 + e + ((2 * k1 + 1) + (N + 1)) = H0 + A0 ∧
   H0 + B0 = H1 + A1 + ((N + 1))
 
-set_option maxHeartbeats 200000 in
+set_option maxHeartbeats 4000000 in
 theorem move3 {n a b k0 A0 B0 H0 k1 A1 B1 H1 N s e : Nat} (h : C3 n a b k0 A0 B0 H0 k1 A1 B1 H1 N s e)
     (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by
   unfold C3 at h
@@ -134,6 +175,435 @@ theorem move3 {n a b k0 A0 B0 H0 k1 A1 B1 H1 N s e : Nat} (h : C3 n a b k0 A0 B0
     rcases Nat.lt_or_ge x (k0) with hx0 | hx0
     · ind_region
     rcases Nat.lt_or_ge x (k0 + k1) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x (H1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x (H0) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx4 | hx4
+    · ind_region
+    ind_region
+  · intro x
+    simp only [adiff]
+    rcases Nat.lt_or_ge x (1) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1) + 1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 1) + (N + 1)) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 1) + (N + 1) + 1) with hx4 | hx4
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx5 | hx5
+    · ind_region
+    ind_region
+
+/-- Constraints of move 4: layers EH, O. -/
+def C4 (n a b k0 A0 B0 H0 k1 A1 H1 N s e : Nat) : Prop :=
+  1 ≤ k0 ∧
+  A0 + B0 = k0 ∧
+  A0 ≠ B0 ∧
+  A1 ≤ k1 ∧
+  1 ≤ N ∧
+  H0 + ((k0 + 1)) = n + 1 ∧
+  H1 + ((k0 + 1) + (k1 + 1)) = n + 1 ∧
+  n + 1 = (2 * k0 + 1) + (2 * k1 + 2) + (N + 1) ∧
+  a = k0 + A1 ∧
+  b = k0 + (k1 + 1) + e ∧
+  H1 + A1 + ((N + 1)) = H0 + A0 ∧
+  H0 + B0 = k0 + (k1 + 1) + s + ((2 * k1 + 2) + (N + 1))
+
+set_option maxHeartbeats 4000000 in
+theorem move4 {n a b k0 A0 B0 H0 k1 A1 H1 N s e : Nat} (h : C4 n a b k0 A0 B0 H0 k1 A1 H1 N s e)
+    (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by
+  unfold C4 at h
+  obtain ⟨c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11⟩ := h
+  obtain ⟨p0, h0⟩ := hasEH' (κ := k0) (A := A0) (B := B0) (lo := 0) (hi := H0) (g := (2 * k1 + 2) + (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p1, h1⟩ := hasO' (κ := k1) (A := A1) (lo := k0) (hi := H1) (g := (N + 1) + 1) (by omega) (by omega) (by omega)
+  obtain ⟨p2, h2⟩ := core_of hc (k0 + (k1 + 1))
+  refine ⟨_, isGraceful_iff_spec.mpr (((h1.append h0).append h2).congr (by omega) (by omega) ?_ ?_)⟩
+  · intro x
+    try dsimp only
+    rcases Nat.lt_or_ge x (k0) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x (k0 + (k1 + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x (H1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x (H0) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx4 | hx4
+    · ind_region
+    ind_region
+  · intro x
+    simp only [adiff]
+    rcases Nat.lt_or_ge x (1) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1) + 1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 2) + (N + 1)) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 2) + (N + 1) + 1) with hx4 | hx4
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx5 | hx5
+    · ind_region
+    ind_region
+
+/-- Constraints of move 5: layers EL, O. -/
+def C5 (n a b k0 A0 B0 H0 k1 A1 H1 N s e : Nat) : Prop :=
+  1 ≤ k0 ∧
+  A0 + B0 = k0 ∧
+  A0 ≠ B0 ∧
+  A1 ≤ k1 ∧
+  1 ≤ N ∧
+  H0 + (k0) = n + 1 ∧
+  H1 + (k0 + (k1 + 1)) = n + 1 ∧
+  n + 1 = (2 * k0 + 1) + (2 * k1 + 2) + (N + 1) ∧
+  a = (k0 + 1) + (k1 + 1) + s ∧
+  b = H1 + A1 ∧
+  (k0 + 1) + (k1 + 1) + e = 0 + A0 + ((2 * k1 + 2) + (N + 1)) ∧
+  0 + B0 + ((N + 1)) = (k0 + 1) + A1
+
+set_option maxHeartbeats 4000000 in
+theorem move5 {n a b k0 A0 B0 H0 k1 A1 H1 N s e : Nat} (h : C5 n a b k0 A0 B0 H0 k1 A1 H1 N s e)
+    (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by
+  unfold C5 at h
+  obtain ⟨c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11⟩ := h
+  obtain ⟨p0, h0⟩ := hasEL' (κ := k0) (A := A0) (B := B0) (lo := 0) (hi := H0) (g := (2 * k1 + 2) + (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p1, h1⟩ := hasO' (κ := k1) (A := A1) (lo := (k0 + 1)) (hi := H1) (g := (N + 1) + 1) (by omega) (by omega) (by omega)
+  obtain ⟨p2, h2⟩ := core_of hc ((k0 + 1) + (k1 + 1))
+  refine ⟨_, isGraceful_iff_spec.mpr (((h2.append h0).append h1).congr (by omega) (by omega) ?_ ?_)⟩
+  · intro x
+    try dsimp only
+    rcases Nat.lt_or_ge x ((k0 + 1)) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x ((k0 + 1) + (k1 + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x (H1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x (H0) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx4 | hx4
+    · ind_region
+    ind_region
+  · intro x
+    simp only [adiff]
+    rcases Nat.lt_or_ge x (1) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1) + 1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 2) + (N + 1)) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 2) + (N + 1) + 1) with hx4 | hx4
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx5 | hx5
+    · ind_region
+    ind_region
+
+/-- Constraints of move 6: layers EL, EL. -/
+def C6 (n a b k0 A0 B0 H0 k1 A1 B1 H1 N s e : Nat) : Prop :=
+  1 ≤ k0 ∧
+  A0 + B0 = k0 ∧
+  A0 ≠ B0 ∧
+  1 ≤ k1 ∧
+  A1 + B1 = k1 ∧
+  A1 ≠ B1 ∧
+  1 ≤ N ∧
+  H0 + (k0) = n + 1 ∧
+  H1 + (k0 + k1) = n + 1 ∧
+  n + 1 = (2 * k0 + 1) + (2 * k1 + 1) + (N + 1) ∧
+  a = (k0 + 1) + A1 ∧
+  b = (k0 + 1) + (k1 + 1) + e ∧
+  (k0 + 1) + B1 = 0 + A0 + ((N + 1)) ∧
+  0 + B0 + ((2 * k1 + 1) + (N + 1)) = (k0 + 1) + (k1 + 1) + s
+
+set_option maxHeartbeats 4000000 in
+theorem move6 {n a b k0 A0 B0 H0 k1 A1 B1 H1 N s e : Nat} (h : C6 n a b k0 A0 B0 H0 k1 A1 B1 H1 N s e)
+    (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by
+  unfold C6 at h
+  obtain ⟨c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13⟩ := h
+  obtain ⟨p0, h0⟩ := hasEL' (κ := k0) (A := A0) (B := B0) (lo := 0) (hi := H0) (g := (2 * k1 + 1) + (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p1, h1⟩ := hasEL' (κ := k1) (A := A1) (B := B1) (lo := (k0 + 1)) (hi := H1) (g := (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p2, h2⟩ := core_of hc ((k0 + 1) + (k1 + 1))
+  refine ⟨_, isGraceful_iff_spec.mpr (((h1.append h0).append h2).congr (by omega) (by omega) ?_ ?_)⟩
+  · intro x
+    try dsimp only
+    rcases Nat.lt_or_ge x ((k0 + 1)) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x ((k0 + 1) + (k1 + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x (H1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x (H0) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx4 | hx4
+    · ind_region
+    ind_region
+  · intro x
+    simp only [adiff]
+    rcases Nat.lt_or_ge x (1) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1) + 1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 1) + (N + 1)) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 1) + (N + 1) + 1) with hx4 | hx4
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx5 | hx5
+    · ind_region
+    ind_region
+
+/-- Constraints of move 7: layers EH, O. -/
+def C7 (n a b k0 A0 B0 H0 k1 A1 H1 N s e : Nat) : Prop :=
+  1 ≤ k0 ∧
+  A0 + B0 = k0 ∧
+  A0 ≠ B0 ∧
+  A1 ≤ k1 ∧
+  1 ≤ N ∧
+  H0 + ((k0 + 1)) = n + 1 ∧
+  H1 + ((k0 + 1) + (k1 + 1)) = n + 1 ∧
+  n + 1 = (2 * k0 + 1) + (2 * k1 + 2) + (N + 1) ∧
+  a = k0 + A1 ∧
+  b = k0 + (k1 + 1) + e ∧
+  H1 + A1 + ((2 * k1 + 2) + (N + 1)) = H0 + A0 ∧
+  H0 + B0 = k0 + (k1 + 1) + s + ((N + 1))
+
+set_option maxHeartbeats 4000000 in
+theorem move7 {n a b k0 A0 B0 H0 k1 A1 H1 N s e : Nat} (h : C7 n a b k0 A0 B0 H0 k1 A1 H1 N s e)
+    (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by
+  unfold C7 at h
+  obtain ⟨c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11⟩ := h
+  obtain ⟨p0, h0⟩ := hasEH' (κ := k0) (A := A0) (B := B0) (lo := 0) (hi := H0) (g := (2 * k1 + 2) + (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p1, h1⟩ := hasO' (κ := k1) (A := A1) (lo := k0) (hi := H1) (g := (N + 1) + 1) (by omega) (by omega) (by omega)
+  obtain ⟨p2, h2⟩ := core_of hc (k0 + (k1 + 1))
+  refine ⟨_, isGraceful_iff_spec.mpr (((h1.append h0).append h2).congr (by omega) (by omega) ?_ ?_)⟩
+  · intro x
+    try dsimp only
+    rcases Nat.lt_or_ge x (k0) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x (k0 + (k1 + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x (H1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x (H0) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx4 | hx4
+    · ind_region
+    ind_region
+  · intro x
+    simp only [adiff]
+    rcases Nat.lt_or_ge x (1) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1) + 1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 2) + (N + 1)) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 2) + (N + 1) + 1) with hx4 | hx4
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx5 | hx5
+    · ind_region
+    ind_region
+
+/-- Constraints of move 8: layers EH, SH. -/
+def C8 (n a b k0 A0 B0 H0 H1 N s e : Nat) : Prop :=
+  1 ≤ k0 ∧
+  A0 + B0 = k0 ∧
+  A0 ≠ B0 ∧
+  1 ≤ N ∧
+  H0 + ((k0 + 1)) = n + 1 ∧
+  H1 + ((k0 + 1) + 1) = n + 1 ∧
+  n + 1 = (2 * k0 + 1) + 1 + (N + 1) ∧
+  a = k0 + s ∧
+  b = H1 ∧
+  k0 + e + (1 + (N + 1)) = H0 + A0 ∧
+  H0 + B0 = H1 + ((N + 1))
+
+set_option maxHeartbeats 4000000 in
+theorem move8 {n a b k0 A0 B0 H0 H1 N s e : Nat} (h : C8 n a b k0 A0 B0 H0 H1 N s e)
+    (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by
+  unfold C8 at h
+  obtain ⟨c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10⟩ := h
+  obtain ⟨p0, h0⟩ := hasEH' (κ := k0) (A := A0) (B := B0) (lo := 0) (hi := H0) (g := 1 + (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  have h1 := Spec.single H1
+  obtain ⟨p2, h2⟩ := core_of hc (k0)
+  refine ⟨_, isGraceful_iff_spec.mpr (((h2.append h0).append h1).congr (by omega) (by omega) ?_ ?_)⟩
+  · intro x
+    try dsimp only
+    rcases Nat.lt_or_ge x (k0) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x (k0) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x (H1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x (H0) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx4 | hx4
+    · ind_region
+    ind_region
+  · intro x
+    simp only [adiff]
+    rcases Nat.lt_or_ge x (1) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1) + 1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x (1 + (N + 1)) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x (1 + (N + 1) + 1) with hx4 | hx4
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx5 | hx5
+    · ind_region
+    ind_region
+
+/-- Constraints of move 9: layers EL, O. -/
+def C9 (n a b k0 A0 B0 H0 k1 A1 H1 N s e : Nat) : Prop :=
+  1 ≤ k0 ∧
+  A0 + B0 = k0 ∧
+  A0 ≠ B0 ∧
+  A1 ≤ k1 ∧
+  1 ≤ N ∧
+  H0 + (k0) = n + 1 ∧
+  H1 + (k0 + (k1 + 1)) = n + 1 ∧
+  n + 1 = (2 * k0 + 1) + (2 * k1 + 2) + (N + 1) ∧
+  a = (k0 + 1) + (k1 + 1) + s ∧
+  b = H1 + A1 ∧
+  (k0 + 1) + (k1 + 1) + e = 0 + A0 + ((N + 1)) ∧
+  0 + B0 + ((2 * k1 + 2) + (N + 1)) = (k0 + 1) + A1
+
+set_option maxHeartbeats 4000000 in
+theorem move9 {n a b k0 A0 B0 H0 k1 A1 H1 N s e : Nat} (h : C9 n a b k0 A0 B0 H0 k1 A1 H1 N s e)
+    (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by
+  unfold C9 at h
+  obtain ⟨c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11⟩ := h
+  obtain ⟨p0, h0⟩ := hasEL' (κ := k0) (A := A0) (B := B0) (lo := 0) (hi := H0) (g := (2 * k1 + 2) + (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p1, h1⟩ := hasO' (κ := k1) (A := A1) (lo := (k0 + 1)) (hi := H1) (g := (N + 1) + 1) (by omega) (by omega) (by omega)
+  obtain ⟨p2, h2⟩ := core_of hc ((k0 + 1) + (k1 + 1))
+  refine ⟨_, isGraceful_iff_spec.mpr (((h2.append h0).append h1).congr (by omega) (by omega) ?_ ?_)⟩
+  · intro x
+    try dsimp only
+    rcases Nat.lt_or_ge x ((k0 + 1)) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x ((k0 + 1) + (k1 + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x (H1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x (H0) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx4 | hx4
+    · ind_region
+    ind_region
+  · intro x
+    simp only [adiff]
+    rcases Nat.lt_or_ge x (1) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1) + 1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 2) + (N + 1)) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 2) + (N + 1) + 1) with hx4 | hx4
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx5 | hx5
+    · ind_region
+    ind_region
+
+/-- Constraints of move 10: layers EH, EH. -/
+def C10 (n a b k0 A0 B0 H0 k1 A1 B1 H1 N s e : Nat) : Prop :=
+  1 ≤ k0 ∧
+  A0 + B0 = k0 ∧
+  A0 ≠ B0 ∧
+  1 ≤ k1 ∧
+  A1 + B1 = k1 ∧
+  A1 ≠ B1 ∧
+  1 ≤ N ∧
+  H0 + ((k0 + 1)) = n + 1 ∧
+  H1 + ((k0 + 1) + (k1 + 1)) = n + 1 ∧
+  n + 1 = (2 * k0 + 1) + (2 * k1 + 1) + (N + 1) ∧
+  a = k0 + k1 + s ∧
+  b = H1 + B1 ∧
+  k0 + k1 + e + ((N + 1)) = H0 + A0 ∧
+  H0 + B0 = H1 + A1 + ((2 * k1 + 1) + (N + 1))
+
+set_option maxHeartbeats 4000000 in
+theorem move10 {n a b k0 A0 B0 H0 k1 A1 B1 H1 N s e : Nat} (h : C10 n a b k0 A0 B0 H0 k1 A1 B1 H1 N s e)
+    (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by
+  unfold C10 at h
+  obtain ⟨c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13⟩ := h
+  obtain ⟨p0, h0⟩ := hasEH' (κ := k0) (A := A0) (B := B0) (lo := 0) (hi := H0) (g := (2 * k1 + 1) + (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p1, h1⟩ := hasEH' (κ := k1) (A := A1) (B := B1) (lo := k0) (hi := H1) (g := (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p2, h2⟩ := core_of hc (k0 + k1)
+  refine ⟨_, isGraceful_iff_spec.mpr (((h2.append h0).append h1).congr (by omega) (by omega) ?_ ?_)⟩
+  · intro x
+    try dsimp only
+    rcases Nat.lt_or_ge x (k0) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x (k0 + k1) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x (H1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x (H0) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx4 | hx4
+    · ind_region
+    ind_region
+  · intro x
+    simp only [adiff]
+    rcases Nat.lt_or_ge x (1) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1) + 1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 1) + (N + 1)) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 1) + (N + 1) + 1) with hx4 | hx4
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx5 | hx5
+    · ind_region
+    ind_region
+
+/-- Constraints of move 11: layers EL, EL. -/
+def C11 (n a b k0 A0 B0 H0 k1 A1 B1 H1 N s e : Nat) : Prop :=
+  1 ≤ k0 ∧
+  A0 + B0 = k0 ∧
+  A0 ≠ B0 ∧
+  1 ≤ k1 ∧
+  A1 + B1 = k1 ∧
+  A1 ≠ B1 ∧
+  1 ≤ N ∧
+  H0 + (k0) = n + 1 ∧
+  H1 + (k0 + k1) = n + 1 ∧
+  n + 1 = (2 * k0 + 1) + (2 * k1 + 1) + (N + 1) ∧
+  a = (k0 + 1) + A1 ∧
+  b = (k0 + 1) + (k1 + 1) + e ∧
+  (k0 + 1) + B1 = 0 + A0 + ((2 * k1 + 1) + (N + 1)) ∧
+  0 + B0 + ((N + 1)) = (k0 + 1) + (k1 + 1) + s
+
+set_option maxHeartbeats 4000000 in
+theorem move11 {n a b k0 A0 B0 H0 k1 A1 B1 H1 N s e : Nat} (h : C11 n a b k0 A0 B0 H0 k1 A1 B1 H1 N s e)
+    (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by
+  unfold C11 at h
+  obtain ⟨c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13⟩ := h
+  obtain ⟨p0, h0⟩ := hasEL' (κ := k0) (A := A0) (B := B0) (lo := 0) (hi := H0) (g := (2 * k1 + 1) + (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p1, h1⟩ := hasEL' (κ := k1) (A := A1) (B := B1) (lo := (k0 + 1)) (hi := H1) (g := (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p2, h2⟩ := core_of hc ((k0 + 1) + (k1 + 1))
+  refine ⟨_, isGraceful_iff_spec.mpr (((h1.append h0).append h2).congr (by omega) (by omega) ?_ ?_)⟩
+  · intro x
+    try dsimp only
+    rcases Nat.lt_or_ge x ((k0 + 1)) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x ((k0 + 1) + (k1 + 1)) with hx1 | hx1
     · ind_region
     rcases Nat.lt_or_ge x (H1) with hx2 | hx2
     · ind_region
@@ -180,7 +650,7 @@ def C12 (n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 B2 H2 N s e : Nat) : Prop :=
   H0 + B0 = k0 + k1 + (k2 + 1) + s + ((2 * k2 + 1) + (N + 1)) ∧
   k0 + k1 + (k2 + 1) + e + ((N + 1)) = H1 + A1
 
-set_option maxHeartbeats 200000 in
+set_option maxHeartbeats 4000000 in
 theorem move12 {n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 B2 H2 N s e : Nat} (h : C12 n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 B2 H2 N s e)
     (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by
   unfold C12 at h
@@ -227,5 +697,260 @@ theorem move12 {n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 B2 H2 N s e : Nat} (h : C12 
     · ind_region
     ind_region
 
+/-- Constraints of move 13: layers EH, EH, O. -/
+def C13 (n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e : Nat) : Prop :=
+  1 ≤ k0 ∧
+  A0 + B0 = k0 ∧
+  A0 ≠ B0 ∧
+  1 ≤ k1 ∧
+  A1 + B1 = k1 ∧
+  A1 ≠ B1 ∧
+  A2 ≤ k2 ∧
+  1 ≤ N ∧
+  H0 + ((k0 + 1)) = n + 1 ∧
+  H1 + ((k0 + 1) + (k1 + 1)) = n + 1 ∧
+  H2 + ((k0 + 1) + (k1 + 1) + (k2 + 1)) = n + 1 ∧
+  n + 1 = (2 * k0 + 1) + (2 * k1 + 1) + (2 * k2 + 2) + (N + 1) ∧
+  a = H2 + A2 ∧
+  b = H1 + B1 ∧
+  k0 + k1 + A2 + ((2 * k1 + 1) + (2 * k2 + 2) + (N + 1)) = H0 + A0 ∧
+  H0 + B0 = k0 + k1 + (k2 + 1) + s + ((2 * k2 + 2) + (N + 1)) ∧
+  k0 + k1 + (k2 + 1) + e + ((N + 1)) = H1 + A1
+
+set_option maxHeartbeats 4000000 in
+theorem move13 {n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e : Nat} (h : C13 n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e)
+    (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by
+  unfold C13 at h
+  obtain ⟨c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16⟩ := h
+  obtain ⟨p0, h0⟩ := hasEH' (κ := k0) (A := A0) (B := B0) (lo := 0) (hi := H0) (g := (2 * k1 + 1) + (2 * k2 + 2) + (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p1, h1⟩ := hasEH' (κ := k1) (A := A1) (B := B1) (lo := k0) (hi := H1) (g := (2 * k2 + 2) + (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p2, h2⟩ := hasO' (κ := k2) (A := A2) (lo := k0 + k1) (hi := H2) (g := (N + 1) + 1) (by omega) (by omega) (by omega)
+  obtain ⟨p3, h3⟩ := core_of hc (k0 + k1 + (k2 + 1))
+  refine ⟨_, isGraceful_iff_spec.mpr ((((h2.reverse.append h0).append h3).append h1).congr (by omega) (by omega) ?_ ?_)⟩
+  · intro x
+    try dsimp only
+    rcases Nat.lt_or_ge x (k0) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x (k0 + k1) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x (k0 + k1 + (k2 + 1)) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x (H2) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x (H1) with hx4 | hx4
+    · ind_region
+    rcases Nat.lt_or_ge x (H0) with hx5 | hx5
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx6 | hx6
+    · ind_region
+    ind_region
+  · intro x
+    simp only [adiff]
+    rcases Nat.lt_or_ge x (1) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1) + 1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k2 + 2) + (N + 1)) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k2 + 2) + (N + 1) + 1) with hx4 | hx4
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 1) + (2 * k2 + 2) + (N + 1)) with hx5 | hx5
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 1) + (2 * k2 + 2) + (N + 1) + 1) with hx6 | hx6
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx7 | hx7
+    · ind_region
+    ind_region
+
+/-- Constraints of move 14: layers EH, EL, EL. -/
+def C14 (n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 B2 H2 N s e : Nat) : Prop :=
+  1 ≤ k0 ∧
+  A0 + B0 = k0 ∧
+  A0 ≠ B0 ∧
+  1 ≤ k1 ∧
+  A1 + B1 = k1 ∧
+  A1 ≠ B1 ∧
+  1 ≤ k2 ∧
+  A2 + B2 = k2 ∧
+  A2 ≠ B2 ∧
+  1 ≤ N ∧
+  H0 + ((k0 + 1)) = n + 1 ∧
+  H1 + ((k0 + 1) + k1) = n + 1 ∧
+  H2 + ((k0 + 1) + k1 + k2) = n + 1 ∧
+  n + 1 = (2 * k0 + 1) + (2 * k1 + 1) + (2 * k2 + 1) + (N + 1) ∧
+  a = k0 + A1 ∧
+  b = k0 + (k1 + 1) + B2 ∧
+  k0 + B1 + ((2 * k2 + 1) + (N + 1)) = k0 + (k1 + 1) + (k2 + 1) + s ∧
+  k0 + (k1 + 1) + (k2 + 1) + e + ((N + 1)) = H0 + A0 ∧
+  H0 + B0 = k0 + (k1 + 1) + A2 + ((2 * k1 + 1) + (2 * k2 + 1) + (N + 1))
+
+set_option maxHeartbeats 4000000 in
+theorem move14 {n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 B2 H2 N s e : Nat} (h : C14 n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 B2 H2 N s e)
+    (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by
+  unfold C14 at h
+  obtain ⟨c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18⟩ := h
+  obtain ⟨p0, h0⟩ := hasEH' (κ := k0) (A := A0) (B := B0) (lo := 0) (hi := H0) (g := (2 * k1 + 1) + (2 * k2 + 1) + (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p1, h1⟩ := hasEL' (κ := k1) (A := A1) (B := B1) (lo := k0) (hi := H1) (g := (2 * k2 + 1) + (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p2, h2⟩ := hasEL' (κ := k2) (A := A2) (B := B2) (lo := k0 + (k1 + 1)) (hi := H2) (g := (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p3, h3⟩ := core_of hc (k0 + (k1 + 1) + (k2 + 1))
+  refine ⟨_, isGraceful_iff_spec.mpr ((((h1.append h3).append h0).append h2).congr (by omega) (by omega) ?_ ?_)⟩
+  · intro x
+    try dsimp only
+    rcases Nat.lt_or_ge x (k0) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x (k0 + (k1 + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x (k0 + (k1 + 1) + (k2 + 1)) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x (H2) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x (H1) with hx4 | hx4
+    · ind_region
+    rcases Nat.lt_or_ge x (H0) with hx5 | hx5
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx6 | hx6
+    · ind_region
+    ind_region
+  · intro x
+    simp only [adiff]
+    rcases Nat.lt_or_ge x (1) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1) + 1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k2 + 1) + (N + 1)) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k2 + 1) + (N + 1) + 1) with hx4 | hx4
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 1) + (2 * k2 + 1) + (N + 1)) with hx5 | hx5
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 1) + (2 * k2 + 1) + (N + 1) + 1) with hx6 | hx6
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx7 | hx7
+    · ind_region
+    ind_region
+
+/-- Constraints of move 15: layers EH, EL, O. -/
+def C15 (n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e : Nat) : Prop :=
+  1 ≤ k0 ∧
+  A0 + B0 = k0 ∧
+  A0 ≠ B0 ∧
+  1 ≤ k1 ∧
+  A1 + B1 = k1 ∧
+  A1 ≠ B1 ∧
+  A2 ≤ k2 ∧
+  1 ≤ N ∧
+  H0 + ((k0 + 1)) = n + 1 ∧
+  H1 + ((k0 + 1) + k1) = n + 1 ∧
+  H2 + ((k0 + 1) + k1 + (k2 + 1)) = n + 1 ∧
+  n + 1 = (2 * k0 + 1) + (2 * k1 + 1) + (2 * k2 + 2) + (N + 1) ∧
+  a = k0 + A1 ∧
+  b = H2 + A2 ∧
+  k0 + B1 + ((2 * k2 + 2) + (N + 1)) = k0 + (k1 + 1) + (k2 + 1) + s ∧
+  k0 + (k1 + 1) + (k2 + 1) + e + ((N + 1)) = H0 + A0 ∧
+  H0 + B0 = k0 + (k1 + 1) + A2 + ((2 * k1 + 1) + (2 * k2 + 2) + (N + 1))
+
+set_option maxHeartbeats 4000000 in
+theorem move15 {n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e : Nat} (h : C15 n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e)
+    (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by
+  unfold C15 at h
+  obtain ⟨c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16⟩ := h
+  obtain ⟨p0, h0⟩ := hasEH' (κ := k0) (A := A0) (B := B0) (lo := 0) (hi := H0) (g := (2 * k1 + 1) + (2 * k2 + 2) + (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p1, h1⟩ := hasEL' (κ := k1) (A := A1) (B := B1) (lo := k0) (hi := H1) (g := (2 * k2 + 2) + (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p2, h2⟩ := hasO' (κ := k2) (A := A2) (lo := k0 + (k1 + 1)) (hi := H2) (g := (N + 1) + 1) (by omega) (by omega) (by omega)
+  obtain ⟨p3, h3⟩ := core_of hc (k0 + (k1 + 1) + (k2 + 1))
+  refine ⟨_, isGraceful_iff_spec.mpr ((((h1.append h3).append h0).append h2).congr (by omega) (by omega) ?_ ?_)⟩
+  · intro x
+    try dsimp only
+    rcases Nat.lt_or_ge x (k0) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x (k0 + (k1 + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x (k0 + (k1 + 1) + (k2 + 1)) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x (H2) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x (H1) with hx4 | hx4
+    · ind_region
+    rcases Nat.lt_or_ge x (H0) with hx5 | hx5
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx6 | hx6
+    · ind_region
+    ind_region
+  · intro x
+    simp only [adiff]
+    rcases Nat.lt_or_ge x (1) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1) + 1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k2 + 2) + (N + 1)) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k2 + 2) + (N + 1) + 1) with hx4 | hx4
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 1) + (2 * k2 + 2) + (N + 1)) with hx5 | hx5
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 1) + (2 * k2 + 2) + (N + 1) + 1) with hx6 | hx6
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx7 | hx7
+    · ind_region
+    ind_region
+
+/-- `(a, b; n)` reduces to a smaller admissible triple by one of the fifteen moves. -/
+inductive Red (n a b : Nat) : Prop
+  | m1 (k0 A0 B0 H0 N s e : Nat) (h : C1 n a b k0 A0 B0 H0 N s e) (hadm : AdmL s e N) : Red n a b
+  | m2 (k0 A0 B0 H0 N s e : Nat) (h : C2 n a b k0 A0 B0 H0 N s e) (hadm : AdmL s e N) : Red n a b
+  | m3 (k0 A0 B0 H0 k1 A1 B1 H1 N s e : Nat) (h : C3 n a b k0 A0 B0 H0 k1 A1 B1 H1 N s e) (hadm : AdmL s e N) : Red n a b
+  | m4 (k0 A0 B0 H0 k1 A1 H1 N s e : Nat) (h : C4 n a b k0 A0 B0 H0 k1 A1 H1 N s e) (hadm : AdmL s e N) : Red n a b
+  | m5 (k0 A0 B0 H0 k1 A1 H1 N s e : Nat) (h : C5 n a b k0 A0 B0 H0 k1 A1 H1 N s e) (hadm : AdmL s e N) : Red n a b
+  | m6 (k0 A0 B0 H0 k1 A1 B1 H1 N s e : Nat) (h : C6 n a b k0 A0 B0 H0 k1 A1 B1 H1 N s e) (hadm : AdmL s e N) : Red n a b
+  | m7 (k0 A0 B0 H0 k1 A1 H1 N s e : Nat) (h : C7 n a b k0 A0 B0 H0 k1 A1 H1 N s e) (hadm : AdmL s e N) : Red n a b
+  | m8 (k0 A0 B0 H0 H1 N s e : Nat) (h : C8 n a b k0 A0 B0 H0 H1 N s e) (hadm : AdmL s e N) : Red n a b
+  | m9 (k0 A0 B0 H0 k1 A1 H1 N s e : Nat) (h : C9 n a b k0 A0 B0 H0 k1 A1 H1 N s e) (hadm : AdmL s e N) : Red n a b
+  | m10 (k0 A0 B0 H0 k1 A1 B1 H1 N s e : Nat) (h : C10 n a b k0 A0 B0 H0 k1 A1 B1 H1 N s e) (hadm : AdmL s e N) : Red n a b
+  | m11 (k0 A0 B0 H0 k1 A1 B1 H1 N s e : Nat) (h : C11 n a b k0 A0 B0 H0 k1 A1 B1 H1 N s e) (hadm : AdmL s e N) : Red n a b
+  | m12 (k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 B2 H2 N s e : Nat) (h : C12 n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 B2 H2 N s e) (hadm : AdmL s e N) : Red n a b
+  | m13 (k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e : Nat) (h : C13 n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e) (hadm : AdmL s e N) : Red n a b
+  | m14 (k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 B2 H2 N s e : Nat) (h : C14 n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 B2 H2 N s e) (hadm : AdmL s e N) : Red n a b
+  | m15 (k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e : Nat) (h : C15 n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e) (hadm : AdmL s e N) : Red n a b
+
+theorem red_sound {n a b : Nat} (h : Red n a b)
+    (ih : ∀ N s e, N < n → AdmL s e N → ∃ p, IsGraceful s e N p) :
+    ∃ p, IsGraceful a b n p := by
+  cases h with
+  | m1 k0 A0 B0 H0 N s e h hadm =>
+    exact move1 h (ih N s e (by unfold C1 at h; omega) hadm)
+  | m2 k0 A0 B0 H0 N s e h hadm =>
+    exact move2 h (ih N s e (by unfold C2 at h; omega) hadm)
+  | m3 k0 A0 B0 H0 k1 A1 B1 H1 N s e h hadm =>
+    exact move3 h (ih N s e (by unfold C3 at h; omega) hadm)
+  | m4 k0 A0 B0 H0 k1 A1 H1 N s e h hadm =>
+    exact move4 h (ih N s e (by unfold C4 at h; omega) hadm)
+  | m5 k0 A0 B0 H0 k1 A1 H1 N s e h hadm =>
+    exact move5 h (ih N s e (by unfold C5 at h; omega) hadm)
+  | m6 k0 A0 B0 H0 k1 A1 B1 H1 N s e h hadm =>
+    exact move6 h (ih N s e (by unfold C6 at h; omega) hadm)
+  | m7 k0 A0 B0 H0 k1 A1 H1 N s e h hadm =>
+    exact move7 h (ih N s e (by unfold C7 at h; omega) hadm)
+  | m8 k0 A0 B0 H0 H1 N s e h hadm =>
+    exact move8 h (ih N s e (by unfold C8 at h; omega) hadm)
+  | m9 k0 A0 B0 H0 k1 A1 H1 N s e h hadm =>
+    exact move9 h (ih N s e (by unfold C9 at h; omega) hadm)
+  | m10 k0 A0 B0 H0 k1 A1 B1 H1 N s e h hadm =>
+    exact move10 h (ih N s e (by unfold C10 at h; omega) hadm)
+  | m11 k0 A0 B0 H0 k1 A1 B1 H1 N s e h hadm =>
+    exact move11 h (ih N s e (by unfold C11 at h; omega) hadm)
+  | m12 k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 B2 H2 N s e h hadm =>
+    exact move12 h (ih N s e (by unfold C12 at h; omega) hadm)
+  | m13 k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e h hadm =>
+    exact move13 h (ih N s e (by unfold C13 at h; omega) hadm)
+  | m14 k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 B2 H2 N s e h hadm =>
+    exact move14 h (ih N s e (by unfold C14 at h; omega) hadm)
+  | m15 k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e h hadm =>
+    exact move15 h (ih N s e (by unfold C15 at h; omega) hadm)
 
 end Gvozdjak
