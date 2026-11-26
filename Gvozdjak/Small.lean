@@ -9,6 +9,8 @@ import Gvozdjak.Statement
 
 namespace Gvozdjak
 
+set_option maxRecDepth 1000000
+
 /-- Boolean test for `IsGraceful`. -/
 def gracefulB (a b n : Nat) (p : List Nat) : Bool :=
   (p.head? == some a) && (p.getLast? == some b) &&
