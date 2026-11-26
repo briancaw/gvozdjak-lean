@@ -37,7 +37,7 @@ def full_witness(j, c, kv):
 
 def exact_domain(j, c, W):
     I = INFO[j]; P = I['params']
-    cons = [lean2isl(cc) for cc in I['cons']] + [validstr('N', 's', 'e')] + [f"{p} = {lin_isl(W[p])}" for p in P]
+    cons = [lean2isl(cc) for cc in I['cons']] + [validstr('N', 's', 'e')] + [f"{p} = {lin_isl(W[p])}" for p in P] + [f"{p} >= 0" for p in P]
     return isl.Set("{ [q,x,y] : exists (n,a,b," + ",".join(P) + ": " + class_sub(c) + " and " + " and ".join(cons) + ") }").coalesce()
 
 def pieces_of(j, c, kv):

@@ -12,361 +12,886 @@ set_option maxHeartbeats 1000000
 
 theorem p00_1 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
-    (hD : Y ≤ (Q + X) ∧ Y < (2 * Q) ∧ Y ≤ ((3 * Q) - X) ∧ (2 * Y) > ((4 * Q) - X) ∧ (3 * Y) > ((3 * Q) + X)) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (4 * Q + (-2) * Y) := ⟨Int.toNat (4 * Q + (-2) * Y), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + (-2) * Y) := ⟨Int.toNat (4 * Q + (-2) * Y), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (0) := ⟨Int.toNat (0), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Y) := ⟨Int.toNat (2 * Y), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-1)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 2 * X + 2 * Y) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (4 * Q + (-2) * Y) := ⟨Int.toNat (4 * Q + (-2) * Y), by first | omega | lia⟩
-  exact Red.m1 k0 A0 B0 H0 N s e (by unfold C1; first | omega | lia) (by unfold AdmL; first | omega | lia)
+    (hD : Y ≤ (Q + X) ∧ (2 * Y) < ((4 * Q) - X) ∧ (3 * Y) ≥ ((5 * Q) - X) ∧ (3 * Y) > ((3 * Q) + X)) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (4 * Q + (-2) * Y) := ⟨Int.toNat (4 * Q + (-2) * Y), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + (-2) * Y) := ⟨Int.toNat (4 * Q + (-2) * Y), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Y) := ⟨Int.toNat (2 * Y), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-1)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-1)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 2 * X + 2 * Y) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (4 * Q + (-2) * Y) := ⟨Int.toNat (4 * Q + (-2) * Y), by omega⟩
+  exact Red.m1 k0 A0 B0 H0 N s e (by unfold C1; omega) (by unfold AdmL; omega)
 
 theorem p00_2 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
     (hD : X ≥ 0 ∧ Y ≥ (Q - X) ∧ ((2 - Q) + (3 * X)) ≤ Y ∧ Y ≤ (Q + X) ∧ Y < ((3 * Q) - (3 * X))) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * X + 1) := ⟨Int.toNat (2 * X + 1), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (2 * X) := ⟨Int.toNat (2 * X), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (1) := ⟨Int.toNat (1), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (4 * Q + (-2) * X) := ⟨Int.toNat (4 * Q + (-2) * X), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (4 * Q + (-6) * X + (-3)) := ⟨Int.toNat (4 * Q + (-6) * X + (-3)), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + (-2)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-2)), by first | omega | lia⟩
-  exact Red.m2 k0 A0 B0 H0 N s e (by unfold C2; first | omega | lia) (by unfold AdmL; first | omega | lia)
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * X + 1) := ⟨Int.toNat (2 * X + 1), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (2 * X) := ⟨Int.toNat (2 * X), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (4 * Q + (-2) * X) := ⟨Int.toNat (4 * Q + (-2) * X), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (4 * Q + (-6) * X + (-3)) := ⟨Int.toNat (4 * Q + (-6) * X + (-3)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + (-2)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-2)), by omega⟩
+  exact Red.m2 k0 A0 B0 H0 N s e (by unfold C2; omega) (by unfold AdmL; omega)
+
+theorem p00_3 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : Y ≥ (((-4) + (7 * Q)) - (7 * X)) ∧ Q ≤ Y ∧ Y < ((2 * Q) - X)) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (1 * Q + (-1) * X + 1 * Y + (-1)) := ⟨Int.toNat (1 * Q + (-1) * X + 1 * Y + (-1)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-3) * Q + 3 * X + 1 * Y + 2) := ⟨Int.toNat ((-3) * Q + 3 * X + 1 * Y + 2), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (3 * Q + 1 * X + (-1) * Y + 1) := ⟨Int.toNat (3 * Q + 1 * X + (-1) * Y + 1), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-1) * Q + 3 * X + (-1) * Y + 1) := ⟨Int.toNat ((-1) * Q + 3 * X + (-1) * Y + 1), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-1) * Q + 3 * X + (-1) * Y + 1) := ⟨Int.toNat ((-1) * Q + 3 * X + (-1) * Y + 1), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X + (-1)) := ⟨Int.toNat (4 * Q + (-2) * X + (-1)), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-2) * Q + 2 * Y) := ⟨Int.toNat ((-2) * Q + 2 * Y), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-1)), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
 
 theorem p00_4 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
-    (hD : Y ≥ Q ∧ ((2 - Q) + X) ≤ Y ∧ Y < ((2 * Q) - X) ∧ Y ≤ (((-6) + (7 * Q)) - (7 * X))) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (1 * Q + (-1) * X + 1 * Y + (-1)) := ⟨Int.toNat (1 * Q + (-1) * X + 1 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-3) * Q + 3 * X + 1 * Y + 2) := ⟨Int.toNat ((-3) * Q + 3 * X + 1 * Y + 2), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (3 * Q + 1 * X + (-1) * Y + 1) := ⟨Int.toNat (3 * Q + 1 * X + (-1) * Y + 1), by first | omega | lia⟩
-  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-1) * Q + 3 * X + (-1) * Y + 1) := ⟨Int.toNat ((-1) * Q + 3 * X + (-1) * Y + 1), by first | omega | lia⟩
-  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-1) * Q + 3 * X + (-1) * Y + 1) := ⟨Int.toNat ((-1) * Q + 3 * X + (-1) * Y + 1), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X + (-1)) := ⟨Int.toNat (4 * Q + (-2) * X + (-1)), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-2) * Q + 2 * Y) := ⟨Int.toNat ((-2) * Q + 2 * Y), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-1)), by first | omega | lia⟩
-  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; first | omega | lia) (by unfold AdmL; first | omega | lia)
+    (hD : Q ≤ Y ∧ Y ≤ ((1 - Q) + (3 * X)) ∧ Y < ((2 * Q) - X) ∧ Y ≤ (((-6) + (7 * Q)) - (7 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (1 * Q + (-1) * X + 1 * Y + (-1)) := ⟨Int.toNat (1 * Q + (-1) * X + 1 * Y + (-1)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-3) * Q + 3 * X + 1 * Y + 2) := ⟨Int.toNat ((-3) * Q + 3 * X + 1 * Y + 2), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (3 * Q + 1 * X + (-1) * Y + 1) := ⟨Int.toNat (3 * Q + 1 * X + (-1) * Y + 1), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-1) * Q + 3 * X + (-1) * Y + 1) := ⟨Int.toNat ((-1) * Q + 3 * X + (-1) * Y + 1), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-1) * Q + 3 * X + (-1) * Y + 1) := ⟨Int.toNat ((-1) * Q + 3 * X + (-1) * Y + 1), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X + (-1)) := ⟨Int.toNat (4 * Q + (-2) * X + (-1)), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-2) * Q + 2 * Y) := ⟨Int.toNat ((-2) * Q + 2 * Y), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-1)), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
+
+theorem p00_5 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : X ≤ Q ∧ Y > ((2 * Q) - X) ∧ (7 * Y) ≤ ((4 + (9 * Q)) - X)) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (1 * Q + (-1) * X + 1 * Y + (-1)) := ⟨Int.toNat (1 * Q + (-1) * X + 1 * Y + (-1)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-4) * Q + 4 * Y + (-3)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-3)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (5 * Q + (-1) * X + (-3) * Y + 2) := ⟨Int.toNat (5 * Q + (-1) * X + (-3) * Y + 2), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (3 * Q + 1 * X + (-1) * Y + 2) := ⟨Int.toNat (3 * Q + 1 * X + (-1) * Y + 2), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (3 * Q + 1 * X + (-3) * Y + 1) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 1), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y) := ⟨Int.toNat (2 * Y), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-3)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-3)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 2 * X + 2 * Y + (-2)) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y + (-2)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-6) * Q + 2 * X + 4 * Y + (-3)) := ⟨Int.toNat ((-6) * Q + 2 * X + 4 * Y + (-3)), by omega⟩
+  exact Red.m5 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C5; omega) (by unfold AdmL; omega)
 
 theorem p00_6 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
     (hD : X ≤ Q ∧ Y > ((2 * Q) - X) ∧ (3 * Y) ≤ ((1 + (3 * Q)) + X) ∧ (7 * Y) ≥ ((6 + (9 * Q)) - X)) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (1 * Q + (-1) * X + 1 * Y + (-1)) := ⟨Int.toNat (1 * Q + (-1) * X + 1 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-4) * Q + 4 * Y + (-3)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-3)), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (5 * Q + (-1) * X + (-3) * Y + 2) := ⟨Int.toNat (5 * Q + (-1) * X + (-3) * Y + 2), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (3 * Q + 1 * X + (-1) * Y + 2) := ⟨Int.toNat (3 * Q + 1 * X + (-1) * Y + 2), by first | omega | lia⟩
-  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (3 * Q + 1 * X + (-3) * Y + 1) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 1), by first | omega | lia⟩
-  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (0) := ⟨Int.toNat (0), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y) := ⟨Int.toNat (2 * Y), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-3)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-3)), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 2 * X + 2 * Y + (-2)) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y + (-2)), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-6) * Q + 2 * X + 4 * Y + (-3)) := ⟨Int.toNat ((-6) * Q + 2 * X + 4 * Y + (-3)), by first | omega | lia⟩
-  exact Red.m5 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C5; first | omega | lia) (by unfold AdmL; first | omega | lia)
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (1 * Q + (-1) * X + 1 * Y + (-1)) := ⟨Int.toNat (1 * Q + (-1) * X + 1 * Y + (-1)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-4) * Q + 4 * Y + (-3)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-3)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (5 * Q + (-1) * X + (-3) * Y + 2) := ⟨Int.toNat (5 * Q + (-1) * X + (-3) * Y + 2), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (3 * Q + 1 * X + (-1) * Y + 2) := ⟨Int.toNat (3 * Q + 1 * X + (-1) * Y + 2), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (3 * Q + 1 * X + (-3) * Y + 1) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 1), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y) := ⟨Int.toNat (2 * Y), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-3)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-3)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 2 * X + 2 * Y + (-2)) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y + (-2)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-6) * Q + 2 * X + 4 * Y + (-3)) := ⟨Int.toNat ((-6) * Q + 2 * X + 4 * Y + (-3)), by omega⟩
+  exact Red.m5 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C5; omega) (by unfold AdmL; omega)
 
 theorem p00_7 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
-    (hD : X ≥ Q ∧ Y < ((5 * Q) - (3 * X)) ∧ (3 * Y) ≥ ((6 - (7 * Q)) + (9 * X))) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-1) * Q + 3 * X + (-1) * Y + 1) := ⟨Int.toNat ((-1) * Q + 3 * X + (-1) * Y + 1), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-4) * Q + 6 * X + (-2) * Y + 3) := ⟨Int.toNat ((-4) * Q + 6 * X + (-2) * Y + 3), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (3 * Q + (-3) * X + 1 * Y + (-2)) := ⟨Int.toNat (3 * Q + (-3) * X + 1 * Y + (-2)), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (5 * Q + (-3) * X + 1 * Y) := ⟨Int.toNat (5 * Q + (-3) * X + 1 * Y), by first | omega | lia⟩
-  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (5 * Q + (-5) * X + 1 * Y + (-3)) := ⟨Int.toNat (5 * Q + (-5) * X + 1 * Y + (-3)), by first | omega | lia⟩
-  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-2) * X + 2 * Y + (-2)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-2)), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * X + 2) := ⟨Int.toNat (2 * X + 2), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * X + 1) := ⟨Int.toNat ((-4) * Q + 4 * X + 1), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 4 * X) := ⟨Int.toNat ((-4) * Q + 4 * X), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * Q + 2 * X + 1) := ⟨Int.toNat ((-2) * Q + 2 * X + 1), by first | omega | lia⟩
-  exact Red.m5 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C5; first | omega | lia) (by unfold AdmL; first | omega | lia)
+    (hD : X < Y ∧ Y < ((5 * Q) - (3 * X)) ∧ (3 * Y) ≤ ((4 - (7 * Q)) + (9 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-1) * Q + 3 * X + (-1) * Y + 1) := ⟨Int.toNat ((-1) * Q + 3 * X + (-1) * Y + 1), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-4) * Q + 6 * X + (-2) * Y + 3) := ⟨Int.toNat ((-4) * Q + 6 * X + (-2) * Y + 3), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (3 * Q + (-3) * X + 1 * Y + (-2)) := ⟨Int.toNat (3 * Q + (-3) * X + 1 * Y + (-2)), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (5 * Q + (-3) * X + 1 * Y) := ⟨Int.toNat (5 * Q + (-3) * X + 1 * Y), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (5 * Q + (-5) * X + 1 * Y + (-3)) := ⟨Int.toNat (5 * Q + (-5) * X + 1 * Y + (-3)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-2) * X + 2 * Y + (-2)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-2)), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * X + 2) := ⟨Int.toNat (2 * X + 2), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * X + 1) := ⟨Int.toNat ((-4) * Q + 4 * X + 1), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 4 * X) := ⟨Int.toNat ((-4) * Q + 4 * X), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * Q + 2 * X + 1) := ⟨Int.toNat ((-2) * Q + 2 * X + 1), by omega⟩
+  exact Red.m5 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C5; omega) (by unfold AdmL; omega)
 
 theorem p00_8 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
-    (hD : X ≥ Q ∧ Y < ((5 * Q) - (3 * X)) ∧ (3 * Y) ≤ ((4 - (7 * Q)) + (9 * X))) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-1) * Q + 3 * X + (-1) * Y + 1) := ⟨Int.toNat ((-1) * Q + 3 * X + (-1) * Y + 1), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-4) * Q + 6 * X + (-2) * Y + 3) := ⟨Int.toNat ((-4) * Q + 6 * X + (-2) * Y + 3), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (3 * Q + (-3) * X + 1 * Y + (-2)) := ⟨Int.toNat (3 * Q + (-3) * X + 1 * Y + (-2)), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (5 * Q + (-3) * X + 1 * Y) := ⟨Int.toNat (5 * Q + (-3) * X + 1 * Y), by first | omega | lia⟩
-  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (5 * Q + (-5) * X + 1 * Y + (-3)) := ⟨Int.toNat (5 * Q + (-5) * X + 1 * Y + (-3)), by first | omega | lia⟩
-  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-2) * X + 2 * Y + (-2)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-2)), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * X + 2) := ⟨Int.toNat (2 * X + 2), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * X + 1) := ⟨Int.toNat ((-4) * Q + 4 * X + 1), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 4 * X) := ⟨Int.toNat ((-4) * Q + 4 * X), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * Q + 2 * X + 1) := ⟨Int.toNat ((-2) * Q + 2 * X + 1), by first | omega | lia⟩
-  exact Red.m5 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C5; first | omega | lia) (by unfold AdmL; first | omega | lia)
-
-theorem p00_9 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
-    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
-    (hD : X < Y ∧ Y ≤ Q ∧ (3 * Y) ≤ ((3 * Q) + X) ∧ (9 * Y) ≥ ((6 + (5 * Q)) + (3 * X))) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (3 * Q + 1 * X + (-3) * Y + 1) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 1), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + 2 * X + (-6) * Y + 3) := ⟨Int.toNat (4 * Q + 2 * X + (-6) * Y + 3), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-1) * Q + (-1) * X + 3 * Y + (-2)) := ⟨Int.toNat ((-1) * Q + (-1) * X + 3 * Y + (-2)), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (1 * Q + (-1) * X + 3 * Y + (-1)) := ⟨Int.toNat (1 * Q + (-1) * X + 3 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-3) * Q + (-1) * X + 5 * Y + (-3)) := ⟨Int.toNat ((-3) * Q + (-1) * X + 5 * Y + (-3)), by first | omega | lia⟩
-  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-3) * Q + 1 * X + 3 * Y + (-1)) := ⟨Int.toNat ((-3) * Q + 1 * X + 3 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * Y + 1) := ⟨Int.toNat (4 * Q + (-2) * Y + 1), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * Y + 1) := ⟨Int.toNat (4 * Q + (-4) * Y + 1), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (2 * Q + (-2) * Y) := ⟨Int.toNat (2 * Q + (-2) * Y), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (1) := ⟨Int.toNat (1), by first | omega | lia⟩
-  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; first | omega | lia) (by unfold AdmL; first | omega | lia)
+    (hD : X > Q ∧ X < Y ∧ Y ≤ ((1 - (2 * Q)) + (3 * X)) ∧ Y < ((5 * Q) - (3 * X)) ∧ (3 * Y) ≥ ((6 - (7 * Q)) + (9 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-1) * Q + 3 * X + (-1) * Y + 1) := ⟨Int.toNat ((-1) * Q + 3 * X + (-1) * Y + 1), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-4) * Q + 6 * X + (-2) * Y + 3) := ⟨Int.toNat ((-4) * Q + 6 * X + (-2) * Y + 3), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (3 * Q + (-3) * X + 1 * Y + (-2)) := ⟨Int.toNat (3 * Q + (-3) * X + 1 * Y + (-2)), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (5 * Q + (-3) * X + 1 * Y) := ⟨Int.toNat (5 * Q + (-3) * X + 1 * Y), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (5 * Q + (-5) * X + 1 * Y + (-3)) := ⟨Int.toNat (5 * Q + (-5) * X + 1 * Y + (-3)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-2) * X + 2 * Y + (-2)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-2)), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * X + 2) := ⟨Int.toNat (2 * X + 2), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * X + 1) := ⟨Int.toNat ((-4) * Q + 4 * X + 1), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 4 * X) := ⟨Int.toNat ((-4) * Q + 4 * X), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * Q + 2 * X + 1) := ⟨Int.toNat ((-2) * Q + 2 * X + 1), by omega⟩
+  exact Red.m5 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C5; omega) (by unfold AdmL; omega)
 
 theorem p00_10 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
-    (hD : X < Y ∧ Y < Q ∧ (3 * Y) ≤ ((3 * Q) + X) ∧ (9 * Y) ≤ ((4 + (5 * Q)) + (3 * X))) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (3 * Q + 1 * X + (-3) * Y + 1) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 1), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + 2 * X + (-6) * Y + 3) := ⟨Int.toNat (4 * Q + 2 * X + (-6) * Y + 3), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-1) * Q + (-1) * X + 3 * Y + (-2)) := ⟨Int.toNat ((-1) * Q + (-1) * X + 3 * Y + (-2)), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (1 * Q + (-1) * X + 3 * Y + (-1)) := ⟨Int.toNat (1 * Q + (-1) * X + 3 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-3) * Q + (-1) * X + 5 * Y + (-3)) := ⟨Int.toNat ((-3) * Q + (-1) * X + 5 * Y + (-3)), by first | omega | lia⟩
-  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-3) * Q + 1 * X + 3 * Y + (-1)) := ⟨Int.toNat ((-3) * Q + 1 * X + 3 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * Y + 1) := ⟨Int.toNat (4 * Q + (-2) * Y + 1), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * Y + 1) := ⟨Int.toNat (4 * Q + (-4) * Y + 1), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (2 * Q + (-2) * Y) := ⟨Int.toNat (2 * Q + (-2) * Y), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (1) := ⟨Int.toNat (1), by first | omega | lia⟩
-  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; first | omega | lia) (by unfold AdmL; first | omega | lia)
+    (hD : Y > X ∧ (3 * Y) > ((3 * Q) - X) ∧ (9 * Y) ≤ ((4 + (5 * Q)) + (3 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (3 * Q + 1 * X + (-3) * Y + 1) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 1), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + 2 * X + (-6) * Y + 3) := ⟨Int.toNat (4 * Q + 2 * X + (-6) * Y + 3), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-1) * Q + (-1) * X + 3 * Y + (-2)) := ⟨Int.toNat ((-1) * Q + (-1) * X + 3 * Y + (-2)), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (1 * Q + (-1) * X + 3 * Y + (-1)) := ⟨Int.toNat (1 * Q + (-1) * X + 3 * Y + (-1)), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-3) * Q + (-1) * X + 5 * Y + (-3)) := ⟨Int.toNat ((-3) * Q + (-1) * X + 5 * Y + (-3)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-3) * Q + 1 * X + 3 * Y + (-1)) := ⟨Int.toNat ((-3) * Q + 1 * X + 3 * Y + (-1)), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * Y + 1) := ⟨Int.toNat (4 * Q + (-2) * Y + 1), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * Y + 1) := ⟨Int.toNat (4 * Q + (-4) * Y + 1), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (2 * Q + (-2) * Y) := ⟨Int.toNat (2 * Q + (-2) * Y), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
+
+theorem p00_11 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : X < Y ∧ Y < Q ∧ ((3 * Q) - X) < (3 * Y) ∧ (3 * Y) ≤ ((1 + (2 * Q)) + X) ∧ (9 * Y) ≥ ((6 + (5 * Q)) + (3 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (3 * Q + 1 * X + (-3) * Y + 1) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 1), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + 2 * X + (-6) * Y + 3) := ⟨Int.toNat (4 * Q + 2 * X + (-6) * Y + 3), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-1) * Q + (-1) * X + 3 * Y + (-2)) := ⟨Int.toNat ((-1) * Q + (-1) * X + 3 * Y + (-2)), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (1 * Q + (-1) * X + 3 * Y + (-1)) := ⟨Int.toNat (1 * Q + (-1) * X + 3 * Y + (-1)), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-3) * Q + (-1) * X + 5 * Y + (-3)) := ⟨Int.toNat ((-3) * Q + (-1) * X + 5 * Y + (-3)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-3) * Q + 1 * X + 3 * Y + (-1)) := ⟨Int.toNat ((-3) * Q + 1 * X + 3 * Y + (-1)), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * Y + 1) := ⟨Int.toNat (4 * Q + (-2) * Y + 1), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * Y + 1) := ⟨Int.toNat (4 * Q + (-4) * Y + 1), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (2 * Q + (-2) * Y) := ⟨Int.toNat (2 * Q + (-2) * Y), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
+
+theorem p00_13 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : Y ≥ ((2 * Q) - X) ∧ ((2 - Q) + (3 * X)) ≤ Y ∧ Y ≤ (Q + X) ∧ Y ≤ ((-3) + (2 * Q)) ∧ (4 * Y) ≤ (((-2) + (8 * Q)) - (3 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (1 * X) := ⟨Int.toNat (1 * X), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (1 * X + (-1)) := ⟨Int.toNat (1 * X + (-1)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (4 * Q + (-1) * X) := ⟨Int.toNat (4 * Q + (-1) * X), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (1 * X + (-1)) := ⟨Int.toNat (1 * X + (-1)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (4 * Q + (-1) * X + (-2) * Y + (-1)) := ⟨Int.toNat (4 * Q + (-1) * X + (-2) * Y + (-1)), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = ((-4) * Q + 2 * X + 2 * Y) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X) := ⟨Int.toNat (4 * Q + (-2) * X), by omega⟩
+  obtain ⟨k2, hk2⟩ : ∃ k2 : Nat, (k2 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨A2, hA2⟩ : ∃ A2 : Nat, (A2 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨B2, hB2⟩ : ∃ B2 : Nat, (B2 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H2, hH2⟩ : ∃ H2 : Nat, (H2 : Int) = (4 * Q + (-2) * X + (-1)) := ⟨Int.toNat (4 * Q + (-2) * X + (-1)), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (1 * X + (-1)) := ⟨Int.toNat (1 * X + (-1)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (4 * Q + (-1) * X + (-2) * Y) := ⟨Int.toNat (4 * Q + (-1) * X + (-2) * Y), by omega⟩
+  exact Red.m12 k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 B2 H2 N s e (by unfold C12; omega) (by unfold AdmL; omega)
 
 theorem p00_18 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
-    (hD : Q < Y ∧ Y < ((-Q) + (3 * X)) ∧ (9 * Y) ≤ ((3 + (13 * Q)) - (3 * X))) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-3) * Q + 1 * X + 3 * Y + (-2)) := ⟨Int.toNat ((-3) * Q + 1 * X + 3 * Y + (-2)), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (5 * Q + (-1) * X + (-3) * Y + 1) := ⟨Int.toNat (5 * Q + (-1) * X + (-3) * Y + 1), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-8) * Q + 2 * X + 6 * Y + (-3)) := ⟨Int.toNat ((-8) * Q + 2 * X + 6 * Y + (-3)), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (7 * Q + (-1) * X + (-3) * Y + 3) := ⟨Int.toNat (7 * Q + (-1) * X + (-3) * Y + 3), by first | omega | lia⟩
-  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (7 * Q + (-1) * X + (-5) * Y + 2) := ⟨Int.toNat (7 * Q + (-1) * X + (-5) * Y + 2), by first | omega | lia⟩
-  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (3 * Q + 1 * X + (-3) * Y + 1) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 1), by first | omega | lia⟩
-  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = (4 * Q + (-2) * X + (-2) * Y + 1) := ⟨Int.toNat (4 * Q + (-2) * X + (-2) * Y + 1), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + 1) := ⟨Int.toNat (2 * Y + 1), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-2)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-2)), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-2) * Q + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * Q + 2 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-4) * Q + 4 * Y + (-2)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-2)), by first | omega | lia⟩
-  exact Red.m6 k0 A0 B0 H0 k1 A1 B1 H1 N s e (by unfold C6; first | omega | lia) (by unfold AdmL; first | omega | lia)
+    (hD : Y > X ∧ ((2 * Q) - X) < (2 * Y) ∧ (2 * Y) < (Q + X) ∧ (3 * Y) ≤ (1 + (4 * X)) ∧ (3 * Y) ≤ ((3 * Q) - X)) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (1 * Y) := ⟨Int.toNat (1 * Y), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (1 * Y + (-1)) := ⟨Int.toNat (1 * Y + (-1)), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (4 * Q + (-1) * Y) := ⟨Int.toNat (4 * Q + (-1) * Y), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (1 * Y + (-2)) := ⟨Int.toNat (1 * Y + (-2)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (2 * X + (-1) * Y) := ⟨Int.toNat (2 * X + (-1) * Y), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = ((-2) * X + 2 * Y + (-2)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-2)), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * Y + 2) := ⟨Int.toNat (4 * Q + (-2) * Y + 2), by omega⟩
+  obtain ⟨k2, hk2⟩ : ∃ k2 : Nat, (k2 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨A2, hA2⟩ : ∃ A2 : Nat, (A2 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨B2, hB2⟩ : ∃ B2 : Nat, (B2 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨H2, hH2⟩ : ∃ H2 : Nat, (H2 : Int) = (4 * Q + (-2) * Y + 1) := ⟨Int.toNat (4 * Q + (-2) * Y + 1), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * Y + (-1)) := ⟨Int.toNat (4 * Q + (-4) * Y + (-1)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (4 * Q + (-2) * X + (-3) * Y) := ⟨Int.toNat (4 * Q + (-2) * X + (-3) * Y), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (1 * Y) := ⟨Int.toNat (1 * Y), by omega⟩
+  exact Red.m14 k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 B2 H2 N s e (by unfold C14; omega) (by unfold AdmL; omega)
+
+theorem p00_19 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : Y < ((-Q) + (3 * X)) ∧ Y ≤ ((2 * Q) - X) ∧ (9 * Y) ≥ ((5 + (13 * Q)) - (3 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-3) * Q + 1 * X + 3 * Y + (-2)) := ⟨Int.toNat ((-3) * Q + 1 * X + 3 * Y + (-2)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (5 * Q + (-1) * X + (-3) * Y + 1) := ⟨Int.toNat (5 * Q + (-1) * X + (-3) * Y + 1), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-8) * Q + 2 * X + 6 * Y + (-3)) := ⟨Int.toNat ((-8) * Q + 2 * X + 6 * Y + (-3)), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (7 * Q + (-1) * X + (-3) * Y + 3) := ⟨Int.toNat (7 * Q + (-1) * X + (-3) * Y + 3), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (7 * Q + (-1) * X + (-5) * Y + 2) := ⟨Int.toNat (7 * Q + (-1) * X + (-5) * Y + 2), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (3 * Q + 1 * X + (-3) * Y + 1) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 1), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = (4 * Q + (-2) * X + (-2) * Y + 1) := ⟨Int.toNat (4 * Q + (-2) * X + (-2) * Y + 1), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + 1) := ⟨Int.toNat (2 * Y + 1), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-2)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-2)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-2) * Q + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * Q + 2 * Y + (-1)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-4) * Q + 4 * Y + (-2)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-2)), by omega⟩
+  exact Red.m6 k0 A0 B0 H0 k1 A1 B1 H1 N s e (by unfold C6; omega) (by unfold AdmL; omega)
 
 theorem p00_20 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
-    (hD : Q < Y ∧ Y < ((-Q) + (3 * X)) ∧ (5 * Y) ≤ ((1 + (7 * Q)) - X) ∧ (9 * Y) ≥ ((5 + (13 * Q)) - (3 * X))) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-3) * Q + 1 * X + 3 * Y + (-2)) := ⟨Int.toNat ((-3) * Q + 1 * X + 3 * Y + (-2)), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (5 * Q + (-1) * X + (-3) * Y + 1) := ⟨Int.toNat (5 * Q + (-1) * X + (-3) * Y + 1), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-8) * Q + 2 * X + 6 * Y + (-3)) := ⟨Int.toNat ((-8) * Q + 2 * X + 6 * Y + (-3)), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (7 * Q + (-1) * X + (-3) * Y + 3) := ⟨Int.toNat (7 * Q + (-1) * X + (-3) * Y + 3), by first | omega | lia⟩
-  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (7 * Q + (-1) * X + (-5) * Y + 2) := ⟨Int.toNat (7 * Q + (-1) * X + (-5) * Y + 2), by first | omega | lia⟩
-  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (3 * Q + 1 * X + (-3) * Y + 1) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 1), by first | omega | lia⟩
-  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = (4 * Q + (-2) * X + (-2) * Y + 1) := ⟨Int.toNat (4 * Q + (-2) * X + (-2) * Y + 1), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + 1) := ⟨Int.toNat (2 * Y + 1), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-2)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-2)), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-2) * Q + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * Q + 2 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-4) * Q + 4 * Y + (-2)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-2)), by first | omega | lia⟩
-  exact Red.m6 k0 A0 B0 H0 k1 A1 B1 H1 N s e (by unfold C6; first | omega | lia) (by unfold AdmL; first | omega | lia)
+    (hD : Y > ((-Q) + (3 * X)) ∧ (3 * Y) ≤ ((1 + (3 * Q)) + X) ∧ (9 * Y) ≥ ((5 + (13 * Q)) - (3 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-3) * Q + 1 * X + 3 * Y + (-2)) := ⟨Int.toNat ((-3) * Q + 1 * X + 3 * Y + (-2)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (5 * Q + (-1) * X + (-3) * Y + 1) := ⟨Int.toNat (5 * Q + (-1) * X + (-3) * Y + 1), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-8) * Q + 2 * X + 6 * Y + (-3)) := ⟨Int.toNat ((-8) * Q + 2 * X + 6 * Y + (-3)), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (7 * Q + (-1) * X + (-3) * Y + 3) := ⟨Int.toNat (7 * Q + (-1) * X + (-3) * Y + 3), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (7 * Q + (-1) * X + (-5) * Y + 2) := ⟨Int.toNat (7 * Q + (-1) * X + (-5) * Y + 2), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (3 * Q + 1 * X + (-3) * Y + 1) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 1), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = (4 * Q + (-2) * X + (-2) * Y + 1) := ⟨Int.toNat (4 * Q + (-2) * X + (-2) * Y + 1), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + 1) := ⟨Int.toNat (2 * Y + 1), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-2)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-2)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-2) * Q + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * Q + 2 * Y + (-1)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-4) * Q + 4 * Y + (-2)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-2)), by omega⟩
+  exact Red.m6 k0 A0 B0 H0 k1 A1 B1 H1 N s e (by unfold C6; omega) (by unfold AdmL; omega)
+
+theorem p00_21 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : Y < ((-Q) + (3 * X)) ∧ Y ≤ ((2 * Q) - X) ∧ (3 * Y) ≥ ((2 + (4 * Q)) - X) ∧ (9 * Y) ≤ ((3 + (13 * Q)) - (3 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-3) * Q + 1 * X + 3 * Y + (-2)) := ⟨Int.toNat ((-3) * Q + 1 * X + 3 * Y + (-2)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (5 * Q + (-1) * X + (-3) * Y + 1) := ⟨Int.toNat (5 * Q + (-1) * X + (-3) * Y + 1), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-8) * Q + 2 * X + 6 * Y + (-3)) := ⟨Int.toNat ((-8) * Q + 2 * X + 6 * Y + (-3)), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (7 * Q + (-1) * X + (-3) * Y + 3) := ⟨Int.toNat (7 * Q + (-1) * X + (-3) * Y + 3), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (7 * Q + (-1) * X + (-5) * Y + 2) := ⟨Int.toNat (7 * Q + (-1) * X + (-5) * Y + 2), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (3 * Q + 1 * X + (-3) * Y + 1) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 1), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = (4 * Q + (-2) * X + (-2) * Y + 1) := ⟨Int.toNat (4 * Q + (-2) * X + (-2) * Y + 1), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + 1) := ⟨Int.toNat (2 * Y + 1), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-2)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-2)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-2) * Q + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * Q + 2 * Y + (-1)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-4) * Q + 4 * Y + (-2)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-2)), by omega⟩
+  exact Red.m6 k0 A0 B0 H0 k1 A1 B1 H1 N s e (by unfold C6; omega) (by unfold AdmL; omega)
 
 theorem p00_22 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
-    (hD : Y ≥ ((5 * Q) - (3 * X)) ∧ X < Y ∧ Y ≤ ((-4) + (2 * Q)) ∧ Y ≤ ((3 * Q) - X) ∧ (2 * Y) ≤ ((3 - Q) + (3 * X))) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * Q + (-1) * Y + 1) := ⟨Int.toNat (2 * Q + (-1) * Y + 1), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (2 * Q + (-1) * Y + (-1)) := ⟨Int.toNat (2 * Q + (-1) * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (2) := ⟨Int.toNat (2), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Q + 1 * Y + (-1)) := ⟨Int.toNat (2 * Q + 1 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (2 * Q + (-1) * Y + (-1)) := ⟨Int.toNat (2 * Q + (-1) * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (2 * Q + (-1) * Y + (-2)) := ⟨Int.toNat (2 * Q + (-1) * Y + (-2)), by first | omega | lia⟩
-  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = (1) := ⟨Int.toNat (1), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + (-1)) := ⟨Int.toNat (2 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨k2, hk2⟩ : ∃ k2 : Nat, (k2 : Int) = ((-2) * X + 2 * Y + (-2)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-2)), by first | omega | lia⟩
-  obtain ⟨A2, hA2⟩ : ∃ A2 : Nat, (A2 : Int) = (0) := ⟨Int.toNat (0), by first | omega | lia⟩
-  obtain ⟨H2, hH2⟩ : ∃ H2 : Nat, (H2 : Int) = (2 * X) := ⟨Int.toNat (2 * X), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * X) := ⟨Int.toNat ((-4) * Q + 4 * X), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (2 * Q + 2 * X + (-3) * Y + 3) := ⟨Int.toNat (2 * Q + 2 * X + (-3) * Y + 3), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (2 * Q + (-2) * X + 1 * Y + (-3)) := ⟨Int.toNat (2 * Q + (-2) * X + 1 * Y + (-3)), by first | omega | lia⟩
-  exact Red.m13 k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e (by unfold C13; first | omega | lia) (by unfold AdmL; first | omega | lia)
+    (hD : Y > ((-Q) + (3 * X)) ∧ ((2 + (4 * Q)) - X) ≤ (3 * Y) ∧ (3 * Y) ≤ ((1 + (3 * Q)) + X) ∧ (9 * Y) ≤ ((3 + (13 * Q)) - (3 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-3) * Q + 1 * X + 3 * Y + (-2)) := ⟨Int.toNat ((-3) * Q + 1 * X + 3 * Y + (-2)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (5 * Q + (-1) * X + (-3) * Y + 1) := ⟨Int.toNat (5 * Q + (-1) * X + (-3) * Y + 1), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-8) * Q + 2 * X + 6 * Y + (-3)) := ⟨Int.toNat ((-8) * Q + 2 * X + 6 * Y + (-3)), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (7 * Q + (-1) * X + (-3) * Y + 3) := ⟨Int.toNat (7 * Q + (-1) * X + (-3) * Y + 3), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (7 * Q + (-1) * X + (-5) * Y + 2) := ⟨Int.toNat (7 * Q + (-1) * X + (-5) * Y + 2), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (3 * Q + 1 * X + (-3) * Y + 1) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 1), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = (4 * Q + (-2) * X + (-2) * Y + 1) := ⟨Int.toNat (4 * Q + (-2) * X + (-2) * Y + 1), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + 1) := ⟨Int.toNat (2 * Y + 1), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-2)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-2)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-2) * Q + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * Q + 2 * Y + (-1)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-4) * Q + 4 * Y + (-2)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-2)), by omega⟩
+  exact Red.m6 k0 A0 B0 H0 k1 A1 B1 H1 N s e (by unfold C6; omega) (by unfold AdmL; omega)
 
-theorem p00_25 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+theorem p00_23 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
-    (hD : X ≤ Q ∧ Y ≤ (Q + X) ∧ Y ≤ ((-2) + (2 * Q)) ∧ (3 * Y) ≥ ((6 * Q) - (4 * X)) ∧ (3 * Y) > ((3 * Q) + X)) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * Q + (-1) * Y) := ⟨Int.toNat (2 * Q + (-1) * Y), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (0) := ⟨Int.toNat (0), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (2 * Q + (-1) * Y) := ⟨Int.toNat (2 * Q + (-1) * Y), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Q + 1 * Y) := ⟨Int.toNat (2 * Q + 1 * Y), by first | omega | lia⟩
-  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (2 * Q + (-1) * Y + (-1)) := ⟨Int.toNat (2 * Q + (-1) * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-2) * Q + 2 * X + 1 * Y) := ⟨Int.toNat ((-2) * Q + 2 * X + 1 * Y), by first | omega | lia⟩
-  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = (4 * Q + (-2) * X + (-2) * Y + (-1)) := ⟨Int.toNat (4 * Q + (-2) * X + (-2) * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + 1) := ⟨Int.toNat (2 * Y + 1), by first | omega | lia⟩
-  obtain ⟨k2, hk2⟩ : ∃ k2 : Nat, (k2 : Int) = (0) := ⟨Int.toNat (0), by first | omega | lia⟩
-  obtain ⟨A2, hA2⟩ : ∃ A2 : Nat, (A2 : Int) = (0) := ⟨Int.toNat (0), by first | omega | lia⟩
-  obtain ⟨H2, hH2⟩ : ∃ H2 : Nat, (H2 : Int) = (2 * Y) := ⟨Int.toNat (2 * Y), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-2)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-2)), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-2) * Q + (-2) * X + 3 * Y + (-1)) := ⟨Int.toNat ((-2) * Q + (-2) * X + 3 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (2 * Q + (-1) * Y) := ⟨Int.toNat (2 * Q + (-1) * Y), by first | omega | lia⟩
-  exact Red.m15 k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e (by unfold C15; first | omega | lia) (by unfold AdmL; first | omega | lia)
+    (hD : Y ≥ ((5 * Q) - (3 * X)) ∧ X < Y ∧ Y ≤ ((-4) + (2 * Q)) ∧ Y ≤ ((3 * Q) - X) ∧ (2 * Y) ≤ ((3 - Q) + (3 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * Q + (-1) * Y + 1) := ⟨Int.toNat (2 * Q + (-1) * Y + 1), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (2 * Q + (-1) * Y + (-1)) := ⟨Int.toNat (2 * Q + (-1) * Y + (-1)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (2) := ⟨Int.toNat (2), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Q + 1 * Y + (-1)) := ⟨Int.toNat (2 * Q + 1 * Y + (-1)), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (2 * Q + (-1) * Y + (-1)) := ⟨Int.toNat (2 * Q + (-1) * Y + (-1)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (2 * Q + (-1) * Y + (-2)) := ⟨Int.toNat (2 * Q + (-1) * Y + (-2)), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + (-1)) := ⟨Int.toNat (2 * Y + (-1)), by omega⟩
+  obtain ⟨k2, hk2⟩ : ∃ k2 : Nat, (k2 : Int) = ((-2) * X + 2 * Y + (-2)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-2)), by omega⟩
+  obtain ⟨A2, hA2⟩ : ∃ A2 : Nat, (A2 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H2, hH2⟩ : ∃ H2 : Nat, (H2 : Int) = (2 * X) := ⟨Int.toNat (2 * X), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * X) := ⟨Int.toNat ((-4) * Q + 4 * X), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (2 * Q + 2 * X + (-3) * Y + 3) := ⟨Int.toNat (2 * Q + 2 * X + (-3) * Y + 3), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (2 * Q + (-2) * X + 1 * Y + (-3)) := ⟨Int.toNat (2 * Q + (-2) * X + 1 * Y + (-3)), by omega⟩
+  exact Red.m13 k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e (by unfold C13; omega) (by unfold AdmL; omega)
 
 theorem p00_26 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : Y ≤ (Q + X) ∧ Y < ((2 * Q) - X) ∧ (3 * Y) ≥ ((6 * Q) - (4 * X)) ∧ (3 * Y) > ((3 * Q) + X)) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * Q + (-1) * Y) := ⟨Int.toNat (2 * Q + (-1) * Y), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (2 * Q + (-1) * Y) := ⟨Int.toNat (2 * Q + (-1) * Y), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Q + 1 * Y) := ⟨Int.toNat (2 * Q + 1 * Y), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (2 * Q + (-1) * Y + (-1)) := ⟨Int.toNat (2 * Q + (-1) * Y + (-1)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-2) * Q + 2 * X + 1 * Y) := ⟨Int.toNat ((-2) * Q + 2 * X + 1 * Y), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = (4 * Q + (-2) * X + (-2) * Y + (-1)) := ⟨Int.toNat (4 * Q + (-2) * X + (-2) * Y + (-1)), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + 1) := ⟨Int.toNat (2 * Y + 1), by omega⟩
+  obtain ⟨k2, hk2⟩ : ∃ k2 : Nat, (k2 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨A2, hA2⟩ : ∃ A2 : Nat, (A2 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H2, hH2⟩ : ∃ H2 : Nat, (H2 : Int) = (2 * Y) := ⟨Int.toNat (2 * Y), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-2)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-2)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-2) * Q + (-2) * X + 3 * Y + (-1)) := ⟨Int.toNat ((-2) * Q + (-2) * X + 3 * Y + (-1)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (2 * Q + (-1) * Y) := ⟨Int.toNat (2 * Q + (-1) * Y), by omega⟩
+  exact Red.m15 k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e (by unfold C15; omega) (by unfold AdmL; omega)
+
+theorem p00_27 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
     (hD : Y ≤ (Q + X) ∧ Y ≤ (2 * Q) ∧ Y ≤ ((3 * Q) - X) ∧ (3 * Y) > ((5 * Q) - X) ∧ (3 * Y) ≥ ((2 + (3 * Q)) + X)) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (4 * Q + (-2) * Y + 1) := ⟨Int.toNat (4 * Q + (-2) * Y + 1), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + (-2) * Y) := ⟨Int.toNat (4 * Q + (-2) * Y), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (1) := ⟨Int.toNat (1), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Y + (-1)) := ⟨Int.toNat (2 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-3)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-3)), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 2 * X + 2 * Y + (-1)) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (4 * Q + (-2) * Y) := ⟨Int.toNat (4 * Q + (-2) * Y), by first | omega | lia⟩
-  exact Red.m1 k0 A0 B0 H0 N s e (by unfold C1; first | omega | lia) (by unfold AdmL; first | omega | lia)
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (4 * Q + (-2) * Y + 1) := ⟨Int.toNat (4 * Q + (-2) * Y + 1), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + (-2) * Y) := ⟨Int.toNat (4 * Q + (-2) * Y), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Y + (-1)) := ⟨Int.toNat (2 * Y + (-1)), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-3)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-3)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 2 * X + 2 * Y + (-1)) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y + (-1)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (4 * Q + (-2) * Y) := ⟨Int.toNat (4 * Q + (-2) * Y), by omega⟩
+  exact Red.m1 k0 A0 B0 H0 N s e (by unfold C1; omega) (by unfold AdmL; omega)
+
+theorem p00_28 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : X < Q ∧ (((-(2 * Q)) - X) + (3 * Y)) ≤ (((Q + X) + Y) / 2) ∧ (((Q + X) + Y) / 2) < ((-Q) + (2 * Y)) ∧ (((Q + X) + Y) / 2) ≤ ((-Q) + (3 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (4 * Q + (-2) * Y + (-1)) := ⟨Int.toNat (4 * Q + (-2) * Y + (-1)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-1) * Q + (-3) * X + 3 * Y + (-1)) := ⟨Int.toNat ((-1) * Q + (-3) * X + 3 * Y + (-1)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (5 * Q + 3 * X + (-5) * Y) := ⟨Int.toNat (5 * Q + 3 * X + (-5) * Y), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Y + 1) := ⟨Int.toNat (2 * Y + 1), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-3) * Q + (-1) * X + 3 * Y) := ⟨Int.toNat ((-3) * Q + (-1) * X + 3 * Y), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = ((-3) * Q + (-1) * X + 3 * Y) := ⟨Int.toNat ((-3) * Q + (-1) * X + 3 * Y), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (3 * Q + 1 * X + (-1) * Y) := ⟨Int.toNat (3 * Q + 1 * X + (-1) * Y), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (2 * Q + 2 * X + (-2) * Y) := ⟨Int.toNat (2 * Q + 2 * X + (-2) * Y), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-1) * Q + 3 * X + (-1) * Y + 1) := ⟨Int.toNat ((-1) * Q + 3 * X + (-1) * Y + 1), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (2 * Q + (-2) * X + (-1)) := ⟨Int.toNat (2 * Q + (-2) * X + (-1)), by omega⟩
+  exact Red.m3 k0 A0 B0 H0 k1 A1 B1 H1 N s e (by unfold C3; omega) (by unfold AdmL; omega)
+
+theorem p00_29 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : (((-(2 * Q)) - X) + (3 * Y)) ≤ (((Q + X) + Y) / 2) ∧ (((Q + X) + Y) / 2) < ((-Q) + (2 * Y)) ∧ (((Q + X) + Y) / 2) ≤ (2 * X) ∧ (((Q + X) + Y) / 2) ≤ ((((-2) + (2 * Q)) - (2 * X)) + Y)) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (4 * Q + (-2) * Y + (-1)) := ⟨Int.toNat (4 * Q + (-2) * Y + (-1)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-1) * Q + (-3) * X + 3 * Y + (-1)) := ⟨Int.toNat ((-1) * Q + (-3) * X + 3 * Y + (-1)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (5 * Q + 3 * X + (-5) * Y) := ⟨Int.toNat (5 * Q + 3 * X + (-5) * Y), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Y + 1) := ⟨Int.toNat (2 * Y + 1), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-3) * Q + (-1) * X + 3 * Y) := ⟨Int.toNat ((-3) * Q + (-1) * X + 3 * Y), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = ((-3) * Q + (-1) * X + 3 * Y) := ⟨Int.toNat ((-3) * Q + (-1) * X + 3 * Y), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (3 * Q + 1 * X + (-1) * Y) := ⟨Int.toNat (3 * Q + 1 * X + (-1) * Y), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (2 * Q + 2 * X + (-2) * Y) := ⟨Int.toNat (2 * Q + 2 * X + (-2) * Y), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-1) * Q + 3 * X + (-1) * Y + 1) := ⟨Int.toNat ((-1) * Q + 3 * X + (-1) * Y + 1), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (2 * Q + (-2) * X + (-1)) := ⟨Int.toNat (2 * Q + (-2) * X + (-1)), by omega⟩
+  exact Red.m3 k0 A0 B0 H0 k1 A1 B1 H1 N s e (by unfold C3; omega) (by unfold AdmL; omega)
+
+theorem p00_30 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : (5 * X) ≤ ((-10) + (4 * Q)) ∧ Y ≥ (((-3) + (3 * Q)) - (3 * X)) ∧ ((6 - (3 * Q)) + (5 * X)) ≤ Y ∧ Y ≤ ((3 - Q) + (3 * X)) ∧ Y ≤ (((-7) + (5 * Q)) - (5 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * X) := ⟨Int.toNat (2 * X), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + (-4) * X + (-9)) := ⟨Int.toNat (4 * Q + (-4) * X + (-9)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-4) * Q + 6 * X + 9) := ⟨Int.toNat ((-4) * Q + 6 * X + 9), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (4 * Q + (-2) * X) := ⟨Int.toNat (4 * Q + (-2) * X), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (2) := ⟨Int.toNat (2), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X + (-3)) := ⟨Int.toNat (4 * Q + (-2) * X + (-3)), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X + (-7)) := ⟨Int.toNat (4 * Q + (-4) * X + (-7)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 6 * X + 6) := ⟨Int.toNat ((-4) * Q + 6 * X + 6), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + (-3)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-3)), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
 
 theorem p00_32 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
-    (hD : X < Y ∧ Y ≤ ((-Q) + (2 * X)) ∧ (3 * Y) ≤ ((2 + (5 * Q)) - X) ∧ (7 * Y) ≥ ((11 + (7 * Q)) + X)) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-1) * Q + 1 * X + 1 * Y + (-2)) := ⟨Int.toNat ((-1) * Q + 1 * X + 1 * Y + (-2)), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-4) * Q + 4 * Y + (-6)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-6)), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (3 * Q + 1 * X + (-3) * Y + 4) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 4), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (5 * Q + (-1) * X + (-1) * Y + 3) := ⟨Int.toNat (5 * Q + (-1) * X + (-1) * Y + 3), by first | omega | lia⟩
-  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (5 * Q + (-1) * X + (-3) * Y + 3) := ⟨Int.toNat (5 * Q + (-1) * X + (-3) * Y + 3), by first | omega | lia⟩
-  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (1) := ⟨Int.toNat (1), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + (-1)) := ⟨Int.toNat (2 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-5)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-5)), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 2 * X + 2 * Y + (-3)) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y + (-3)), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * Q + (-2) * X + 4 * Y + (-5)) := ⟨Int.toNat ((-2) * Q + (-2) * X + 4 * Y + (-5)), by first | omega | lia⟩
-  exact Red.m5 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C5; first | omega | lia) (by unfold AdmL; first | omega | lia)
+    (hD : X ≥ Q ∧ Y ≥ ((2 - Q) + (2 * X)) ∧ (7 * Y) ≤ ((9 + (7 * Q)) + X)) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-1) * Q + 1 * X + 1 * Y + (-2)) := ⟨Int.toNat ((-1) * Q + 1 * X + 1 * Y + (-2)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-4) * Q + 4 * Y + (-6)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-6)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (3 * Q + 1 * X + (-3) * Y + 4) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 4), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (5 * Q + (-1) * X + (-1) * Y + 3) := ⟨Int.toNat (5 * Q + (-1) * X + (-1) * Y + 3), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (5 * Q + (-1) * X + (-3) * Y + 3) := ⟨Int.toNat (5 * Q + (-1) * X + (-3) * Y + 3), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + (-1)) := ⟨Int.toNat (2 * Y + (-1)), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-5)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-5)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 2 * X + 2 * Y + (-3)) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y + (-3)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * Q + (-2) * X + 4 * Y + (-5)) := ⟨Int.toNat ((-2) * Q + (-2) * X + 4 * Y + (-5)), by omega⟩
+  exact Red.m5 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C5; omega) (by unfold AdmL; omega)
 
 theorem p00_33 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
-    (hD : X < Y ∧ Y ≤ ((-Q) + (2 * X)) ∧ (3 * Y) ≤ ((2 + (5 * Q)) - X) ∧ (7 * Y) ≤ ((9 + (7 * Q)) + X)) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-1) * Q + 1 * X + 1 * Y + (-2)) := ⟨Int.toNat ((-1) * Q + 1 * X + 1 * Y + (-2)), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-4) * Q + 4 * Y + (-6)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-6)), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (3 * Q + 1 * X + (-3) * Y + 4) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 4), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (5 * Q + (-1) * X + (-1) * Y + 3) := ⟨Int.toNat (5 * Q + (-1) * X + (-1) * Y + 3), by first | omega | lia⟩
-  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (5 * Q + (-1) * X + (-3) * Y + 3) := ⟨Int.toNat (5 * Q + (-1) * X + (-3) * Y + 3), by first | omega | lia⟩
-  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (1) := ⟨Int.toNat (1), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + (-1)) := ⟨Int.toNat (2 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-5)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-5)), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 2 * X + 2 * Y + (-3)) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y + (-3)), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * Q + (-2) * X + 4 * Y + (-5)) := ⟨Int.toNat ((-2) * Q + (-2) * X + 4 * Y + (-5)), by first | omega | lia⟩
-  exact Red.m5 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C5; first | omega | lia) (by unfold AdmL; first | omega | lia)
+    (hD : X < Y ∧ Y ≤ ((-Q) + (2 * X)) ∧ (3 * Y) ≤ ((2 + (5 * Q)) - X) ∧ (7 * Y) ≥ ((11 + (7 * Q)) + X)) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-1) * Q + 1 * X + 1 * Y + (-2)) := ⟨Int.toNat ((-1) * Q + 1 * X + 1 * Y + (-2)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-4) * Q + 4 * Y + (-6)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-6)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (3 * Q + 1 * X + (-3) * Y + 4) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 4), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (5 * Q + (-1) * X + (-1) * Y + 3) := ⟨Int.toNat (5 * Q + (-1) * X + (-1) * Y + 3), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (5 * Q + (-1) * X + (-3) * Y + 3) := ⟨Int.toNat (5 * Q + (-1) * X + (-3) * Y + 3), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + (-1)) := ⟨Int.toNat (2 * Y + (-1)), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-5)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-5)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 2 * X + 2 * Y + (-3)) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y + (-3)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * Q + (-2) * X + 4 * Y + (-5)) := ⟨Int.toNat ((-2) * Q + (-2) * X + 4 * Y + (-5)), by omega⟩
+  exact Red.m5 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C5; omega) (by unfold AdmL; omega)
 
-theorem p00_42 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+theorem p00_34 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
-    (hD : X < Q ∧ ((11 * Q) - (9 * X)) < (3 * Y) ∧ (3 * Y) ≤ (((-2) + (3 * Q)) + X)) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (5 * Q + (-3) * X + (-1) * Y) := ⟨Int.toNat (5 * Q + (-3) * X + (-1) * Y), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-3) * Q + 3 * X + 1 * Y) := ⟨Int.toNat ((-3) * Q + 3 * X + 1 * Y), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (8 * Q + (-6) * X + (-2) * Y) := ⟨Int.toNat (8 * Q + (-6) * X + (-2) * Y), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = ((-1) * Q + 3 * X + 1 * Y) := ⟨Int.toNat ((-1) * Q + 3 * X + 1 * Y), by first | omega | lia⟩
-  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-5) * Q + 5 * X + 1 * Y + (-1)) := ⟨Int.toNat ((-5) * Q + 5 * X + 1 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-1) * Q + 3 * X + (-1) * Y + (-1)) := ⟨Int.toNat ((-1) * Q + 3 * X + (-1) * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = ((-4) * Q + 2 * X + 2 * Y) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X) := ⟨Int.toNat (4 * Q + (-2) * X), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X) := ⟨Int.toNat (4 * Q + (-4) * X), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (1) := ⟨Int.toNat (1), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (2 * Q + (-2) * X + 1) := ⟨Int.toNat (2 * Q + (-2) * X + 1), by first | omega | lia⟩
-  exact Red.m3 k0 A0 B0 H0 k1 A1 B1 H1 N s e (by unfold C3; first | omega | lia) (by unfold AdmL; first | omega | lia)
+    (hD : X < Y ∧ Y ≤ ((-Q) + (2 * X)) ∧ (3 * Y) ≤ ((2 + (5 * Q)) - X) ∧ (7 * Y) ≤ ((9 + (7 * Q)) + X)) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-1) * Q + 1 * X + 1 * Y + (-2)) := ⟨Int.toNat ((-1) * Q + 1 * X + 1 * Y + (-2)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-4) * Q + 4 * Y + (-6)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-6)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (3 * Q + 1 * X + (-3) * Y + 4) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 4), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (5 * Q + (-1) * X + (-1) * Y + 3) := ⟨Int.toNat (5 * Q + (-1) * X + (-1) * Y + 3), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (5 * Q + (-1) * X + (-3) * Y + 3) := ⟨Int.toNat (5 * Q + (-1) * X + (-3) * Y + 3), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + (-1)) := ⟨Int.toNat (2 * Y + (-1)), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-5)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-5)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 2 * X + 2 * Y + (-3)) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y + (-3)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * Q + (-2) * X + 4 * Y + (-5)) := ⟨Int.toNat ((-2) * Q + (-2) * X + 4 * Y + (-5)), by omega⟩
+  exact Red.m5 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C5; omega) (by unfold AdmL; omega)
+
+theorem p00_35 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : X ≥ Q ∧ Y ≥ ((2 - Q) + (2 * X)) ∧ (3 * Y) ≤ ((2 + (5 * Q)) - X) ∧ (7 * Y) ≥ ((11 + (7 * Q)) + X)) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-1) * Q + 1 * X + 1 * Y + (-2)) := ⟨Int.toNat ((-1) * Q + 1 * X + 1 * Y + (-2)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-4) * Q + 4 * Y + (-6)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-6)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (3 * Q + 1 * X + (-3) * Y + 4) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 4), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (5 * Q + (-1) * X + (-1) * Y + 3) := ⟨Int.toNat (5 * Q + (-1) * X + (-1) * Y + 3), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (5 * Q + (-1) * X + (-3) * Y + 3) := ⟨Int.toNat (5 * Q + (-1) * X + (-3) * Y + 3), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + (-1)) := ⟨Int.toNat (2 * Y + (-1)), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + (-5)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-5)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 2 * X + 2 * Y + (-3)) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y + (-3)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * Q + (-2) * X + 4 * Y + (-5)) := ⟨Int.toNat ((-2) * Q + (-2) * X + 4 * Y + (-5)), by omega⟩
+  exact Red.m5 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C5; omega) (by unfold AdmL; omega)
+
+theorem p00_39 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : Y ≥ ((2 + (3 * Q)) - (3 * X)) ∧ X < Y ∧ Y ≤ Q ∧ (3 * Y) ≤ ((3 + (2 * Q)) + X) ∧ (9 * Y) ≥ ((11 + (5 * Q)) + (3 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (3 * Q + 1 * X + (-3) * Y + 2) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + 2), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-1) * Q + (-1) * X + 3 * Y + (-4)) := ⟨Int.toNat ((-1) * Q + (-1) * X + 3 * Y + (-4)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (4 * Q + 2 * X + (-6) * Y + 6) := ⟨Int.toNat (4 * Q + 2 * X + (-6) * Y + 6), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (1 * Q + (-1) * X + 3 * Y + (-1)) := ⟨Int.toNat (1 * Q + (-1) * X + 3 * Y + (-1)), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-3) * Q + (-1) * X + 5 * Y + (-5)) := ⟨Int.toNat ((-3) * Q + (-1) * X + 5 * Y + (-5)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-3) * Q + 1 * X + 3 * Y + (-3)) := ⟨Int.toNat ((-3) * Q + 1 * X + 3 * Y + (-3)), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = ((-2) * X + 2 * Y + (-2)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-2)), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * Y + 4) := ⟨Int.toNat (4 * Q + (-2) * Y + 4), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * Y + 4) := ⟨Int.toNat (4 * Q + (-4) * Y + 4), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (2 * Q + (-2) * Y + 3) := ⟨Int.toNat (2 * Q + (-2) * Y + 3), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  exact Red.m6 k0 A0 B0 H0 k1 A1 B1 H1 N s e (by unfold C6; omega) (by unfold AdmL; omega)
+
+theorem p00_40 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : Y > ((2 * Q) - (2 * X)) ∧ ((-Q) + (3 * X)) < Y ∧ Y ≤ (Q + X) ∧ Y ≤ ((3 * Q) - (3 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * X) := ⟨Int.toNat (2 * X), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (2 * X) := ⟨Int.toNat (2 * X), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (4 * Q + (-2) * X + 1) := ⟨Int.toNat (4 * Q + (-2) * X + 1), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X + (-1)) := ⟨Int.toNat (4 * Q + (-4) * X + (-1)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (4 * Q + (-6) * X + (-1)) := ⟨Int.toNat (4 * Q + (-6) * X + (-1)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-1)), by omega⟩
+  exact Red.m2 k0 A0 B0 H0 N s e (by unfold C2; omega) (by unfold AdmL; omega)
+
+theorem p00_41 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : X > 0 ∧ Y ≥ (Q - X) ∧ ((-Q) + (3 * X)) < Y ∧ Y ≤ (Q + X) ∧ Y < ((2 * Q) - (2 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * X) := ⟨Int.toNat (2 * X), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (2 * X) := ⟨Int.toNat (2 * X), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (4 * Q + (-2) * X + 1) := ⟨Int.toNat (4 * Q + (-2) * X + 1), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X + (-1)) := ⟨Int.toNat (4 * Q + (-4) * X + (-1)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (4 * Q + (-6) * X + (-1)) := ⟨Int.toNat (4 * Q + (-6) * X + (-1)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-1)), by omega⟩
+  exact Red.m2 k0 A0 B0 H0 N s e (by unfold C2; omega) (by unfold AdmL; omega)
 
 theorem p00_43 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
-    (hD : X < Q ∧ Y ≥ ((2 + (5 * Q)) - (5 * X)) ∧ (3 * Y) ≤ (((-2) + (3 * Q)) + X) ∧ (3 * Y) < ((11 * Q) - (9 * X))) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (5 * Q + (-3) * X + (-1) * Y) := ⟨Int.toNat (5 * Q + (-3) * X + (-1) * Y), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-3) * Q + 3 * X + 1 * Y) := ⟨Int.toNat ((-3) * Q + 3 * X + 1 * Y), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (8 * Q + (-6) * X + (-2) * Y) := ⟨Int.toNat (8 * Q + (-6) * X + (-2) * Y), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = ((-1) * Q + 3 * X + 1 * Y) := ⟨Int.toNat ((-1) * Q + 3 * X + 1 * Y), by first | omega | lia⟩
-  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-5) * Q + 5 * X + 1 * Y + (-1)) := ⟨Int.toNat ((-5) * Q + 5 * X + 1 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-1) * Q + 3 * X + (-1) * Y + (-1)) := ⟨Int.toNat ((-1) * Q + 3 * X + (-1) * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = ((-4) * Q + 2 * X + 2 * Y) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X) := ⟨Int.toNat (4 * Q + (-2) * X), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X) := ⟨Int.toNat (4 * Q + (-4) * X), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (1) := ⟨Int.toNat (1), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (2 * Q + (-2) * X + 1) := ⟨Int.toNat (2 * Q + (-2) * X + 1), by first | omega | lia⟩
-  exact Red.m3 k0 A0 B0 H0 k1 A1 B1 H1 N s e (by unfold C3; first | omega | lia) (by unfold AdmL; first | omega | lia)
+    (hD : Y ≥ ((2 * Q) - X) ∧ (3 * Y) ≤ (((-2) + (3 * Q)) + X) ∧ (3 * Y) < ((11 * Q) - (9 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (5 * Q + (-3) * X + (-1) * Y) := ⟨Int.toNat (5 * Q + (-3) * X + (-1) * Y), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-3) * Q + 3 * X + 1 * Y) := ⟨Int.toNat ((-3) * Q + 3 * X + 1 * Y), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (8 * Q + (-6) * X + (-2) * Y) := ⟨Int.toNat (8 * Q + (-6) * X + (-2) * Y), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = ((-1) * Q + 3 * X + 1 * Y) := ⟨Int.toNat ((-1) * Q + 3 * X + 1 * Y), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-5) * Q + 5 * X + 1 * Y + (-1)) := ⟨Int.toNat ((-5) * Q + 5 * X + 1 * Y + (-1)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-1) * Q + 3 * X + (-1) * Y + (-1)) := ⟨Int.toNat ((-1) * Q + 3 * X + (-1) * Y + (-1)), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = ((-4) * Q + 2 * X + 2 * Y) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X) := ⟨Int.toNat (4 * Q + (-2) * X), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X) := ⟨Int.toNat (4 * Q + (-4) * X), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (2 * Q + (-2) * X + 1) := ⟨Int.toNat (2 * Q + (-2) * X + 1), by omega⟩
+  exact Red.m3 k0 A0 B0 H0 k1 A1 B1 H1 N s e (by unfold C3; omega) (by unfold AdmL; omega)
+
+theorem p00_44 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : X < Q ∧ ((2 * Q) - X) ≤ Y ∧ Y ≤ ((4 * Q) - (3 * X)) ∧ ((11 * Q) - (9 * X)) < (3 * Y) ∧ (3 * Y) ≤ (((-2) + (3 * Q)) + X)) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (5 * Q + (-3) * X + (-1) * Y) := ⟨Int.toNat (5 * Q + (-3) * X + (-1) * Y), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-3) * Q + 3 * X + 1 * Y) := ⟨Int.toNat ((-3) * Q + 3 * X + 1 * Y), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (8 * Q + (-6) * X + (-2) * Y) := ⟨Int.toNat (8 * Q + (-6) * X + (-2) * Y), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = ((-1) * Q + 3 * X + 1 * Y) := ⟨Int.toNat ((-1) * Q + 3 * X + 1 * Y), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-5) * Q + 5 * X + 1 * Y + (-1)) := ⟨Int.toNat ((-5) * Q + 5 * X + 1 * Y + (-1)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-1) * Q + 3 * X + (-1) * Y + (-1)) := ⟨Int.toNat ((-1) * Q + 3 * X + (-1) * Y + (-1)), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = ((-4) * Q + 2 * X + 2 * Y) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X) := ⟨Int.toNat (4 * Q + (-2) * X), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X) := ⟨Int.toNat (4 * Q + (-4) * X), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (2 * Q + (-2) * X + 1) := ⟨Int.toNat (2 * Q + (-2) * X + 1), by omega⟩
+  exact Red.m3 k0 A0 B0 H0 k1 A1 B1 H1 N s e (by unfold C3; omega) (by unfold AdmL; omega)
+
+theorem p00_45 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : Y < ((-Q) + (3 * X)) ∧ Y ≤ ((4 * Q) - (3 * X)) ∧ (3 * Y) > ((11 * Q) - (9 * X)) ∧ (3 * Y) ≥ ((3 * Q) + X)) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (5 * Q + (-3) * X + (-1) * Y) := ⟨Int.toNat (5 * Q + (-3) * X + (-1) * Y), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-3) * Q + 3 * X + 1 * Y) := ⟨Int.toNat ((-3) * Q + 3 * X + 1 * Y), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (8 * Q + (-6) * X + (-2) * Y) := ⟨Int.toNat (8 * Q + (-6) * X + (-2) * Y), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = ((-1) * Q + 3 * X + 1 * Y) := ⟨Int.toNat ((-1) * Q + 3 * X + 1 * Y), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-5) * Q + 5 * X + 1 * Y + (-1)) := ⟨Int.toNat ((-5) * Q + 5 * X + 1 * Y + (-1)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-1) * Q + 3 * X + (-1) * Y + (-1)) := ⟨Int.toNat ((-1) * Q + 3 * X + (-1) * Y + (-1)), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = ((-4) * Q + 2 * X + 2 * Y) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X) := ⟨Int.toNat (4 * Q + (-2) * X), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X) := ⟨Int.toNat (4 * Q + (-4) * X), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (2 * Q + (-2) * X + 1) := ⟨Int.toNat (2 * Q + (-2) * X + 1), by omega⟩
+  exact Red.m3 k0 A0 B0 H0 k1 A1 B1 H1 N s e (by unfold C3; omega) (by unfold AdmL; omega)
 
 theorem p00_47 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
-    (hD : (2 * Y) > (Q + X) ∧ (((-(2 * Q)) + (2 * X)) + Y) ≤ (((Q + X) + Y) / 2) ∧ (((Q + X) + Y) / 2) < (((-(3 * Q)) + (3 * X)) + Y)) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (4 * Q + (-2) * Y) := ⟨Int.toNat (4 * Q + (-2) * Y), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (1 * Q + (-1) * X + 1 * Y) := ⟨Int.toNat (1 * Q + (-1) * X + 1 * Y), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (3 * Q + 1 * X + (-3) * Y) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Y + 1) := ⟨Int.toNat (2 * Y + 1), by first | omega | lia⟩
-  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-5) * Q + 1 * X + 3 * Y + (-1)) := ⟨Int.toNat ((-5) * Q + 1 * X + 3 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-5) * Q + 1 * X + 3 * Y + (-1)) := ⟨Int.toNat ((-5) * Q + 1 * X + 3 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (5 * Q + (-1) * X + (-1) * Y + 1) := ⟨Int.toNat (5 * Q + (-1) * X + (-1) * Y + 1), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (6 * Q + (-2) * X + (-2) * Y + (-1)) := ⟨Int.toNat (6 * Q + (-2) * X + (-2) * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (1 * Q + 1 * X + (-1) * Y + (-1)) := ⟨Int.toNat (1 * Q + 1 * X + (-1) * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (8 * Q + (-4) * X + (-2) * Y + (-1)) := ⟨Int.toNat (8 * Q + (-4) * X + (-2) * Y + (-1)), by first | omega | lia⟩
-  exact Red.m9 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C9; first | omega | lia) (by unfold AdmL; first | omega | lia)
+    (hD : Y ≥ (Q - X) ∧ Y > X ∧ (2 * Y) ≤ (((-2) + Q) + X) ∧ (3 * Y) < (4 * X) ∧ (3 * Y) < ((3 * Q) - X)) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (1 * Y + 1) := ⟨Int.toNat (1 * Y + 1), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (1 * Y) := ⟨Int.toNat (1 * Y), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (4 * Q + (-1) * Y + (-1)) := ⟨Int.toNat (4 * Q + (-1) * Y + (-1)), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (1 * Y + (-2)) := ⟨Int.toNat (1 * Y + (-2)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (2 * X + (-1) * Y + (-1)) := ⟨Int.toNat (2 * X + (-1) * Y + (-1)), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = ((-2) * X + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-1)), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * Y + 1) := ⟨Int.toNat (4 * Q + (-2) * Y + 1), by omega⟩
+  obtain ⟨k2, hk2⟩ : ∃ k2 : Nat, (k2 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨A2, hA2⟩ : ∃ A2 : Nat, (A2 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨B2, hB2⟩ : ∃ B2 : Nat, (B2 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H2, hH2⟩ : ∃ H2 : Nat, (H2 : Int) = (4 * Q + (-2) * Y) := ⟨Int.toNat (4 * Q + (-2) * Y), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * Y + (-3)) := ⟨Int.toNat (4 * Q + (-4) * Y + (-3)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (4 * Q + (-2) * X + (-3) * Y + (-1)) := ⟨Int.toNat (4 * Q + (-2) * X + (-3) * Y + (-1)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (1 * Y) := ⟨Int.toNat (1 * Y), by omega⟩
+  exact Red.m14 k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 B2 H2 N s e (by unfold C14; omega) (by unfold AdmL; omega)
+
+theorem p00_48 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : ((-Q) + (2 * Y)) ≤ (((Q + X) + Y) / 2) ∧ (((Q + X) + Y) / 2) < (((-(2 * Q)) + X) + (2 * Y)) ∧ (((Q + X) + Y) / 2) < ((4 * Q) - (2 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (4 * Q + (-2) * Y) := ⟨Int.toNat (4 * Q + (-2) * Y), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (1 * Q + (-1) * X + 1 * Y) := ⟨Int.toNat (1 * Q + (-1) * X + 1 * Y), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (3 * Q + 1 * X + (-3) * Y) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Y + 1) := ⟨Int.toNat (2 * Y + 1), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-5) * Q + 1 * X + 3 * Y + (-1)) := ⟨Int.toNat ((-5) * Q + 1 * X + 3 * Y + (-1)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-5) * Q + 1 * X + 3 * Y + (-1)) := ⟨Int.toNat ((-5) * Q + 1 * X + 3 * Y + (-1)), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (5 * Q + (-1) * X + (-1) * Y + 1) := ⟨Int.toNat (5 * Q + (-1) * X + (-1) * Y + 1), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (6 * Q + (-2) * X + (-2) * Y + (-1)) := ⟨Int.toNat (6 * Q + (-2) * X + (-2) * Y + (-1)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (1 * Q + 1 * X + (-1) * Y + (-1)) := ⟨Int.toNat (1 * Q + 1 * X + (-1) * Y + (-1)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (8 * Q + (-4) * X + (-2) * Y + (-1)) := ⟨Int.toNat (8 * Q + (-4) * X + (-2) * Y + (-1)), by omega⟩
+  exact Red.m9 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C9; omega) (by unfold AdmL; omega)
+
+theorem p00_49 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : (((Q + X) + Y) / 2) ≥ ((-Q) + (2 * Y)) ∧ (((-(2 * Q)) + (2 * X)) + Y) ≤ (((Q + X) + Y) / 2) ∧ (((Q + X) + Y) / 2) < (((-(3 * Q)) + (3 * X)) + Y) ∧ (((Q + X) + Y) / 2) < (((-(2 * Q)) + X) + (2 * Y))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (4 * Q + (-2) * Y) := ⟨Int.toNat (4 * Q + (-2) * Y), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (1 * Q + (-1) * X + 1 * Y) := ⟨Int.toNat (1 * Q + (-1) * X + 1 * Y), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (3 * Q + 1 * X + (-3) * Y) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Y + 1) := ⟨Int.toNat (2 * Y + 1), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-5) * Q + 1 * X + 3 * Y + (-1)) := ⟨Int.toNat ((-5) * Q + 1 * X + 3 * Y + (-1)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-5) * Q + 1 * X + 3 * Y + (-1)) := ⟨Int.toNat ((-5) * Q + 1 * X + 3 * Y + (-1)), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (5 * Q + (-1) * X + (-1) * Y + 1) := ⟨Int.toNat (5 * Q + (-1) * X + (-1) * Y + 1), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (6 * Q + (-2) * X + (-2) * Y + (-1)) := ⟨Int.toNat (6 * Q + (-2) * X + (-2) * Y + (-1)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (1 * Q + 1 * X + (-1) * Y + (-1)) := ⟨Int.toNat (1 * Q + 1 * X + (-1) * Y + (-1)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (8 * Q + (-4) * X + (-2) * Y + (-1)) := ⟨Int.toNat (8 * Q + (-4) * X + (-2) * Y + (-1)), by omega⟩
+  exact Red.m9 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C9; omega) (by unfold AdmL; omega)
+
+theorem p00_50 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : Y ≤ (((-2) + (2 * Q)) - X) ∧ (3 * Y) ≤ (((-5) + (3 * Q)) + X) ∧ (9 * Y) ≥ (((-12) + (13 * Q)) - (3 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-3) * Q + 1 * X + 3 * Y + 5) := ⟨Int.toNat ((-3) * Q + 1 * X + 3 * Y + 5), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-8) * Q + 2 * X + 6 * Y + 9) := ⟨Int.toNat ((-8) * Q + 2 * X + 6 * Y + 9), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (5 * Q + (-1) * X + (-3) * Y + (-4)) := ⟨Int.toNat (5 * Q + (-1) * X + (-3) * Y + (-4)), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (7 * Q + (-1) * X + (-3) * Y + (-5)) := ⟨Int.toNat (7 * Q + (-1) * X + (-3) * Y + (-5)), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (7 * Q + (-1) * X + (-5) * Y + (-9)) := ⟨Int.toNat (7 * Q + (-1) * X + (-5) * Y + (-9)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (3 * Q + 1 * X + (-3) * Y + (-5)) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + (-5)), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + 3) := ⟨Int.toNat (2 * Y + 3), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + 5) := ⟨Int.toNat ((-4) * Q + 4 * Y + 5), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-2) * Q + 2 * Y + 4) := ⟨Int.toNat ((-2) * Q + 2 * Y + 4), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-4) * Q + 4 * Y + 3) := ⟨Int.toNat ((-4) * Q + 4 * Y + 3), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
+
+theorem p00_51 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : Q ≤ Y ∧ Y ≤ (((-2) + (2 * Q)) - X) ∧ (((-4) + (4 * Q)) - X) ≤ (3 * Y) ∧ (3 * Y) ≤ (((-5) + (3 * Q)) + X) ∧ (9 * Y) ≤ (((-14) + (13 * Q)) - (3 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-3) * Q + 1 * X + 3 * Y + 5) := ⟨Int.toNat ((-3) * Q + 1 * X + 3 * Y + 5), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-8) * Q + 2 * X + 6 * Y + 9) := ⟨Int.toNat ((-8) * Q + 2 * X + 6 * Y + 9), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (5 * Q + (-1) * X + (-3) * Y + (-4)) := ⟨Int.toNat (5 * Q + (-1) * X + (-3) * Y + (-4)), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (7 * Q + (-1) * X + (-3) * Y + (-5)) := ⟨Int.toNat (7 * Q + (-1) * X + (-3) * Y + (-5)), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (7 * Q + (-1) * X + (-5) * Y + (-9)) := ⟨Int.toNat (7 * Q + (-1) * X + (-5) * Y + (-9)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (3 * Q + 1 * X + (-3) * Y + (-5)) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y + (-5)), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + 3) := ⟨Int.toNat (2 * Y + 3), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y + 5) := ⟨Int.toNat ((-4) * Q + 4 * Y + 5), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-2) * Q + 2 * Y + 4) := ⟨Int.toNat ((-2) * Q + 2 * Y + 4), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-4) * Q + 4 * Y + 3) := ⟨Int.toNat ((-4) * Q + 4 * Y + 3), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
+
+theorem p00_53 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : Y > X ∧ ((3 * Q) - X) ≤ (3 * Y) ∧ (3 * Y) ≤ ((2 * Q) + X) ∧ (9 * Y) > ((5 * Q) + (3 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (3 * Q + 1 * X + (-3) * Y) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + 2 * X + (-6) * Y) := ⟨Int.toNat (4 * Q + 2 * X + (-6) * Y), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-1) * Q + (-1) * X + 3 * Y) := ⟨Int.toNat ((-1) * Q + (-1) * X + 3 * Y), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (1 * Q + (-1) * X + 3 * Y) := ⟨Int.toNat (1 * Q + (-1) * X + 3 * Y), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-3) * Q + (-1) * X + 5 * Y + (-1)) := ⟨Int.toNat ((-3) * Q + (-1) * X + 5 * Y + (-1)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-3) * Q + 1 * X + 3 * Y) := ⟨Int.toNat ((-3) * Q + 1 * X + 3 * Y), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * Y) := ⟨Int.toNat (4 * Q + (-2) * Y), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * Y + (-1)) := ⟨Int.toNat (4 * Q + (-4) * Y + (-1)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (2 * Q + (-2) * Y) := ⟨Int.toNat (2 * Q + (-2) * Y), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
 
 theorem p00_54 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
-    (hD : X < Y ∧ Y < Q ∧ (3 * Y) < ((3 * Q) + X) ∧ (9 * Y) > ((5 * Q) + (3 * X))) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (3 * Q + 1 * X + (-3) * Y) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + 2 * X + (-6) * Y) := ⟨Int.toNat (4 * Q + 2 * X + (-6) * Y), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-1) * Q + (-1) * X + 3 * Y) := ⟨Int.toNat ((-1) * Q + (-1) * X + 3 * Y), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (1 * Q + (-1) * X + 3 * Y) := ⟨Int.toNat (1 * Q + (-1) * X + 3 * Y), by first | omega | lia⟩
-  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-3) * Q + (-1) * X + 5 * Y + (-1)) := ⟨Int.toNat ((-3) * Q + (-1) * X + 5 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-3) * Q + 1 * X + 3 * Y) := ⟨Int.toNat ((-3) * Q + 1 * X + 3 * Y), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * Y) := ⟨Int.toNat (4 * Q + (-2) * Y), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * Y + (-1)) := ⟨Int.toNat (4 * Q + (-4) * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (2 * Q + (-2) * Y) := ⟨Int.toNat (2 * Q + (-2) * Y), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (0) := ⟨Int.toNat (0), by first | omega | lia⟩
-  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; first | omega | lia) (by unfold AdmL; first | omega | lia)
-
-theorem p00_55 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
-    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
     (hD : (3 * Y) ≤ ((3 * Q) + X) ∧ (4 * Y) ≤ (((-2) + (6 * Q)) - X) ∧ (5 * Y) ≥ (((-1) + (7 * Q)) - X) ∧ (5 * Y) ≥ ((5 * Q) + X)) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (4 * Q + (-2) * Y + (-1)) := ⟨Int.toNat (4 * Q + (-2) * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (8 * Q + (-6) * Y + (-1)) := ⟨Int.toNat (8 * Q + (-6) * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-4) * Q + 4 * Y) := ⟨Int.toNat ((-4) * Q + 4 * Y), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Y + 1) := ⟨Int.toNat (2 * Y + 1), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y) := ⟨Int.toNat (2 * Y), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y) := ⟨Int.toNat ((-4) * Q + 4 * Y), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 2 * X + 2 * Y + 1) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y + 1), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (8 * Q + (-6) * Y + (-1)) := ⟨Int.toNat (8 * Q + (-6) * Y + (-1)), by first | omega | lia⟩
-  exact Red.m8 k0 A0 B0 H0 H1 N s e (by unfold C8; first | omega | lia) (by unfold AdmL; first | omega | lia)
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (4 * Q + (-2) * Y + (-1)) := ⟨Int.toNat (4 * Q + (-2) * Y + (-1)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (8 * Q + (-6) * Y + (-1)) := ⟨Int.toNat (8 * Q + (-6) * Y + (-1)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-4) * Q + 4 * Y) := ⟨Int.toNat ((-4) * Q + 4 * Y), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Y + 1) := ⟨Int.toNat (2 * Y + 1), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y) := ⟨Int.toNat (2 * Y), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y) := ⟨Int.toNat ((-4) * Q + 4 * Y), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 2 * X + 2 * Y + 1) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y + 1), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (8 * Q + (-6) * Y + (-1)) := ⟨Int.toNat (8 * Q + (-6) * Y + (-1)), by omega⟩
+  exact Red.m8 k0 A0 B0 H0 H1 N s e (by unfold C8; omega) (by unfold AdmL; omega)
+
+theorem p00_56 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : Y ≥ (((-1) + (4 * Q)) - (4 * X)) ∧ ((4 - (3 * Q)) + (5 * X)) ≤ Y ∧ Y ≤ ((2 - Q) + (3 * X)) ∧ Y ≤ (((-3) + (5 * Q)) - (5 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * X + (-1)) := ⟨Int.toNat (2 * X + (-1)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-4) * Q + 6 * X + 5) := ⟨Int.toNat ((-4) * Q + 6 * X + 5), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (4 * Q + (-4) * X + (-6)) := ⟨Int.toNat (4 * Q + (-4) * X + (-6)), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (4 * Q + (-2) * X + 2) := ⟨Int.toNat (4 * Q + (-2) * X + 2), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (2) := ⟨Int.toNat (2), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = (2) := ⟨Int.toNat (2), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X) := ⟨Int.toNat (4 * Q + (-2) * X), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X + (-4)) := ⟨Int.toNat (4 * Q + (-4) * X + (-4)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (8 * Q + (-10) * X + (-7)) := ⟨Int.toNat (8 * Q + (-10) * X + (-7)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + (-3)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-3)), by omega⟩
+  exact Red.m6 k0 A0 B0 H0 k1 A1 B1 H1 N s e (by unfold C6; omega) (by unfold AdmL; omega)
+
+theorem p00_61 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : Y < ((2 * Q) - X) ∧ (2 * Y) ≤ (((-2) + (2 * Q)) + X) ∧ (3 * Y) ≥ ((4 * Q) - X) ∧ (((-1) + (3 * Q)) + X) ≤ (3 * Y) ∧ (3 * Y) ≤ ((3 * Q) + X)) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * X + (-1)) := ⟨Int.toNat (2 * X + (-1)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (8 * Q + (-6) * Y + (-1)) := ⟨Int.toNat (8 * Q + (-6) * Y + (-1)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-8) * Q + 2 * X + 6 * Y) := ⟨Int.toNat ((-8) * Q + 2 * X + 6 * Y), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (4 * Q + (-2) * X + 2) := ⟨Int.toNat (4 * Q + (-2) * X + 2), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (4 * Q + (-2) * X + (-2) * Y) := ⟨Int.toNat (4 * Q + (-2) * X + (-2) * Y), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = (4 * Q + (-2) * X + (-2) * Y) := ⟨Int.toNat (4 * Q + (-2) * X + (-2) * Y), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + 2) := ⟨Int.toNat (2 * Y + 2), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y) := ⟨Int.toNat ((-4) * Q + 4 * Y), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-8) * Q + (-2) * X + 8 * Y + 1) := ⟨Int.toNat ((-8) * Q + (-2) * X + 8 * Y + 1), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-4) * Q + 4 * Y + (-1)) := ⟨Int.toNat ((-4) * Q + 4 * Y + (-1)), by omega⟩
+  exact Red.m6 k0 A0 B0 H0 k1 A1 B1 H1 N s e (by unfold C6; omega) (by unfold AdmL; omega)
+
+theorem p00_62 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : Y ≥ ((5 * Q) - (3 * X)) ∧ X < Y ∧ Y ≤ ((3 * Q) - X) ∧ (((-1) + (3 * Q)) + X) ≤ (3 * Y) ∧ (3 * Y) ≤ (((-2) + (2 * Q)) + (2 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (4 * Q + (-2) * Y + (-2)) := ⟨Int.toNat (4 * Q + (-2) * Y + (-2)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (4 * Q + (-2) * Y + (-3)) := ⟨Int.toNat (4 * Q + (-2) * Y + (-3)), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Y + 2) := ⟨Int.toNat (2 * Y + 2), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y) := ⟨Int.toNat (2 * Y), by omega⟩
+  obtain ⟨k2, hk2⟩ : ∃ k2 : Nat, (k2 : Int) = ((-2) * X + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-1)), by omega⟩
+  obtain ⟨A2, hA2⟩ : ∃ A2 : Nat, (A2 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H2, hH2⟩ : ∃ H2 : Nat, (H2 : Int) = (2 * X) := ⟨Int.toNat (2 * X), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * X) := ⟨Int.toNat ((-4) * Q + 4 * X), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (4 * Q + 2 * X + (-4) * Y + (-1)) := ⟨Int.toNat (4 * Q + 2 * X + (-4) * Y + (-1)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + 1) := ⟨Int.toNat ((-2) * X + 2 * Y + 1), by omega⟩
+  exact Red.m13 k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e (by unfold C13; omega) (by unfold AdmL; omega)
 
 theorem p00_64 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
-    (hD : Y ≥ ((5 * Q) - (3 * X)) ∧ X < Y ∧ Y ≤ ((3 * Q) - X) ∧ (((-1) + (3 * Q)) + X) ≤ (3 * Y) ∧ (3 * Y) ≤ (((-2) + (2 * Q)) + (2 * X))) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (4 * Q + (-2) * Y + (-2)) := ⟨Int.toNat (4 * Q + (-2) * Y + (-2)), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (1) := ⟨Int.toNat (1), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (4 * Q + (-2) * Y + (-3)) := ⟨Int.toNat (4 * Q + (-2) * Y + (-3)), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Y + 2) := ⟨Int.toNat (2 * Y + 2), by first | omega | lia⟩
-  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (1) := ⟨Int.toNat (1), by first | omega | lia⟩
-  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (1) := ⟨Int.toNat (1), by first | omega | lia⟩
-  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = (0) := ⟨Int.toNat (0), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y) := ⟨Int.toNat (2 * Y), by first | omega | lia⟩
-  obtain ⟨k2, hk2⟩ : ∃ k2 : Nat, (k2 : Int) = ((-2) * X + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨A2, hA2⟩ : ∃ A2 : Nat, (A2 : Int) = (0) := ⟨Int.toNat (0), by first | omega | lia⟩
-  obtain ⟨H2, hH2⟩ : ∃ H2 : Nat, (H2 : Int) = (2 * X) := ⟨Int.toNat (2 * X), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * X) := ⟨Int.toNat ((-4) * Q + 4 * X), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (4 * Q + 2 * X + (-4) * Y + (-1)) := ⟨Int.toNat (4 * Q + 2 * X + (-4) * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + 1) := ⟨Int.toNat ((-2) * X + 2 * Y + 1), by first | omega | lia⟩
-  exact Red.m13 k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e (by unfold C13; first | omega | lia) (by unfold AdmL; first | omega | lia)
+    (hD : (5 * X) ≤ ((-4) + (4 * Q)) ∧ Y ≥ (((-1) + (3 * Q)) - (3 * X)) ∧ ((2 - (3 * Q)) + (5 * X)) ≤ Y ∧ Y ≤ ((1 - Q) + (3 * X)) ∧ Y ≤ (((-3) + (5 * Q)) - (5 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * X) := ⟨Int.toNat (2 * X), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-4) * Q + 6 * X + 3) := ⟨Int.toNat ((-4) * Q + 6 * X + 3), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (4 * Q + (-2) * X) := ⟨Int.toNat (4 * Q + (-2) * X), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X + (-1)) := ⟨Int.toNat (4 * Q + (-2) * X + (-1)), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 6 * X + 2) := ⟨Int.toNat ((-4) * Q + 6 * X + 2), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-1)), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
 
 theorem p00_65 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
-    (hD : Y ≥ ((5 * Q) - (3 * X)) ∧ (3 + X) ≤ Y ∧ Y ≤ ((-5) + (2 * Q)) ∧ Y ≤ ((3 * Q) - X) ∧ (2 * Y) ≤ ((4 - Q) + (3 * X))) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * Q + (-1) * Y + 1) := ⟨Int.toNat (2 * Q + (-1) * Y + 1), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (2 * Q + (-1) * Y) := ⟨Int.toNat (2 * Q + (-1) * Y), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (1) := ⟨Int.toNat (1), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Q + 1 * Y + (-1)) := ⟨Int.toNat (2 * Q + 1 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (2 * Q + (-1) * Y) := ⟨Int.toNat (2 * Q + (-1) * Y), by first | omega | lia⟩
-  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (2 * Q + (-1) * Y + (-2)) := ⟨Int.toNat (2 * Q + (-1) * Y + (-2)), by first | omega | lia⟩
-  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = (2) := ⟨Int.toNat (2), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y + (-2)) := ⟨Int.toNat (2 * Y + (-2)), by first | omega | lia⟩
-  obtain ⟨k2, hk2⟩ : ∃ k2 : Nat, (k2 : Int) = ((-2) * X + 2 * Y + (-3)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-3)), by first | omega | lia⟩
-  obtain ⟨A2, hA2⟩ : ∃ A2 : Nat, (A2 : Int) = (0) := ⟨Int.toNat (0), by first | omega | lia⟩
-  obtain ⟨H2, hH2⟩ : ∃ H2 : Nat, (H2 : Int) = (2 * X) := ⟨Int.toNat (2 * X), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * X) := ⟨Int.toNat ((-4) * Q + 4 * X), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (2 * Q + 2 * X + (-3) * Y + 4) := ⟨Int.toNat (2 * Q + 2 * X + (-3) * Y + 4), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (2 * Q + (-2) * X + 1 * Y + (-4)) := ⟨Int.toNat (2 * Q + (-2) * X + 1 * Y + (-4)), by first | omega | lia⟩
-  exact Red.m13 k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e (by unfold C13; first | omega | lia) (by unfold AdmL; first | omega | lia)
+    (hD : (5 * X) ≤ ((-3) + (4 * Q)) ∧ Y ≥ ((3 * Q) - (3 * X)) ∧ ((-(3 * Q)) + (5 * X)) < Y ∧ Y ≤ ((-Q) + (3 * X)) ∧ Y ≤ (((-2) + (5 * Q)) - (5 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * X + (-1)) := ⟨Int.toNat (2 * X + (-1)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-4) * Q + 6 * X + 2) := ⟨Int.toNat ((-4) * Q + 6 * X + 2), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (4 * Q + (-2) * X + 1) := ⟨Int.toNat (4 * Q + (-2) * X + 1), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X + (-1)) := ⟨Int.toNat (4 * Q + (-2) * X + (-1)), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 6 * X) := ⟨Int.toNat ((-4) * Q + 6 * X), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-1)), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
 
 theorem p00_67 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : (5 * X) ≤ ((-2) + (4 * Q)) ∧ (5 * X) ≥ ((-2) + (4 * Q)) ∧ ((-1) + Q) ≤ Y ∧ Y ≤ Q ∧ (3 + (4 * Q)) ≤ (5 * Y) ∧ (5 * Y) ≤ ((-8) + (6 * Q))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * X + (-1)) := ⟨Int.toNat (2 * X + (-1)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-4) * Q + 6 * X + 2) := ⟨Int.toNat ((-4) * Q + 6 * X + 2), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (4 * Q + (-2) * X + 1) := ⟨Int.toNat (4 * Q + (-2) * X + 1), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (1) := ⟨Int.toNat (1), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X + (-1)) := ⟨Int.toNat (4 * Q + (-2) * X + (-1)), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 6 * X) := ⟨Int.toNat ((-4) * Q + 6 * X), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-1)), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
+
+theorem p00_68 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : (5 * X) ≤ ((-3) + (4 * Q)) ∧ Y > ((3 * Q) - (3 * X)) ∧ ((-(3 * Q)) + (5 * X)) ≤ Y ∧ Y < ((-Q) + (3 * X)) ∧ Y < ((5 * Q) - (5 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * X + (-2)) := ⟨Int.toNat (2 * X + (-2)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-4) * Q + 6 * X + 1) := ⟨Int.toNat ((-4) * Q + 6 * X + 1), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (4 * Q + (-2) * X + 2) := ⟨Int.toNat (4 * Q + (-2) * X + 2), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (2) := ⟨Int.toNat (2), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (2) := ⟨Int.toNat (2), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X + (-1)) := ⟨Int.toNat (4 * Q + (-2) * X + (-1)), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 6 * X + (-2)) := ⟨Int.toNat ((-4) * Q + 6 * X + (-2)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-1)), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
+
+theorem p00_70 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : (5 * X) ≤ ((-1) + (4 * Q)) ∧ (5 * X) ≥ ((-1) + (4 * Q)) ∧ ((-1) + Q) ≤ Y ∧ Y ≤ Q ∧ (4 + (4 * Q)) ≤ (5 * Y) ∧ (5 * Y) ≤ ((-9) + (6 * Q))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * X + (-2)) := ⟨Int.toNat (2 * X + (-2)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-4) * Q + 6 * X + 1) := ⟨Int.toNat ((-4) * Q + 6 * X + 1), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (4 * Q + (-2) * X + 2) := ⟨Int.toNat (4 * Q + (-2) * X + 2), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (2) := ⟨Int.toNat (2), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (2) := ⟨Int.toNat (2), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X + (-1)) := ⟨Int.toNat (4 * Q + (-2) * X + (-1)), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 6 * X + (-2)) := ⟨Int.toNat ((-4) * Q + 6 * X + (-2)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-1)), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
+
+theorem p00_71 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : X < Y ∧ Y ≤ ((2 - (3 * Q)) + (5 * X)) ∧ Y ≤ (((-5) + (5 * Q)) - (5 * X))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (3 * Q + (-3) * X + 1 * Y + (-2)) := ⟨Int.toNat (3 * Q + (-3) * X + 1 * Y + (-2)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-1) * Q + 1 * X + 1 * Y + 1) := ⟨Int.toNat ((-1) * Q + 1 * X + 1 * Y + 1), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (1 * Q + 3 * X + (-1) * Y + 2) := ⟨Int.toNat (1 * Q + 3 * X + (-1) * Y + 2), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-3) * Q + 5 * X + (-1) * Y + 2) := ⟨Int.toNat ((-3) * Q + 5 * X + (-1) * Y + 2), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-3) * Q + 5 * X + (-1) * Y + 2) := ⟨Int.toNat ((-3) * Q + 5 * X + (-1) * Y + 2), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X + (-1)) := ⟨Int.toNat (4 * Q + (-2) * X + (-1)), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (2 * Q + (-4) * X + 2 * Y + (-2)) := ⟨Int.toNat (2 * Q + (-4) * X + 2 * Y + (-2)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-1)), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
+
+theorem p00_72 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : Y ≥ (((-3) + (5 * Q)) - (5 * X)) ∧ X < Y ∧ Y < Q) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (3 * Q + (-3) * X + 1 * Y + (-2)) := ⟨Int.toNat (3 * Q + (-3) * X + 1 * Y + (-2)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-1) * Q + 1 * X + 1 * Y + 1) := ⟨Int.toNat ((-1) * Q + 1 * X + 1 * Y + 1), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (1 * Q + 3 * X + (-1) * Y + 2) := ⟨Int.toNat (1 * Q + 3 * X + (-1) * Y + 2), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-3) * Q + 5 * X + (-1) * Y + 2) := ⟨Int.toNat ((-3) * Q + 5 * X + (-1) * Y + 2), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-3) * Q + 5 * X + (-1) * Y + 2) := ⟨Int.toNat ((-3) * Q + 5 * X + (-1) * Y + 2), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X + (-1)) := ⟨Int.toNat (4 * Q + (-2) * X + (-1)), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X + (-3)) := ⟨Int.toNat (4 * Q + (-4) * X + (-3)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (2 * Q + (-4) * X + 2 * Y + (-2)) := ⟨Int.toNat (2 * Q + (-4) * X + 2 * Y + (-2)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-1)), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
+
+theorem p00_73 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
     (hD : Y ≥ ((5 * Q) - (3 * X)) ∧ (2 + X) ≤ Y ∧ Y ≤ ((3 * Q) - X) ∧ (4 * Y) ≤ ((2 * Q) + (3 * X))) : Red n a b := by
-  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * Q + (-1) * X + (-1)) := ⟨Int.toNat (2 * Q + (-1) * X + (-1)), by first | omega | lia⟩
-  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (2 * Q + (-1) * X + (-1)) := ⟨Int.toNat (2 * Q + (-1) * X + (-1)), by first | omega | lia⟩
-  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (0) := ⟨Int.toNat (0), by first | omega | lia⟩
-  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Q + 1 * X + 1) := ⟨Int.toNat (2 * Q + 1 * X + 1), by first | omega | lia⟩
-  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (2 * Q + (-1) * X + (-1)) := ⟨Int.toNat (2 * Q + (-1) * X + (-1)), by first | omega | lia⟩
-  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (2 * Q + 1 * X + (-2) * Y) := ⟨Int.toNat (2 * Q + 1 * X + (-2) * Y), by first | omega | lia⟩
-  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = ((-2) * X + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-1)), by first | omega | lia⟩
-  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * X + 1) := ⟨Int.toNat (2 * X + 1), by first | omega | lia⟩
-  obtain ⟨k2, hk2⟩ : ∃ k2 : Nat, (k2 : Int) = (0) := ⟨Int.toNat (0), by first | omega | lia⟩
-  obtain ⟨A2, hA2⟩ : ∃ A2 : Nat, (A2 : Int) = (0) := ⟨Int.toNat (0), by first | omega | lia⟩
-  obtain ⟨H2, hH2⟩ : ∃ H2 : Nat, (H2 : Int) = (2 * X) := ⟨Int.toNat (2 * X), by first | omega | lia⟩
-  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * X) := ⟨Int.toNat ((-4) * Q + 4 * X), by first | omega | lia⟩
-  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (2 * Q + (-1) * X + (-1)) := ⟨Int.toNat (2 * Q + (-1) * X + (-1)), by first | omega | lia⟩
-  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (2 * Q + 1 * X + (-2) * Y + 1) := ⟨Int.toNat (2 * Q + 1 * X + (-2) * Y + 1), by first | omega | lia⟩
-  exact Red.m13 k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e (by unfold C13; first | omega | lia) (by unfold AdmL; first | omega | lia)
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * Q + (-1) * X + (-1)) := ⟨Int.toNat (2 * Q + (-1) * X + (-1)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (2 * Q + (-1) * X + (-1)) := ⟨Int.toNat (2 * Q + (-1) * X + (-1)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (2 * Q + 1 * X + 1) := ⟨Int.toNat (2 * Q + 1 * X + 1), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (2 * Q + (-1) * X + (-1)) := ⟨Int.toNat (2 * Q + (-1) * X + (-1)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (2 * Q + 1 * X + (-2) * Y) := ⟨Int.toNat (2 * Q + 1 * X + (-2) * Y), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = ((-2) * X + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-1)), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * X + 1) := ⟨Int.toNat (2 * X + 1), by omega⟩
+  obtain ⟨k2, hk2⟩ : ∃ k2 : Nat, (k2 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨A2, hA2⟩ : ∃ A2 : Nat, (A2 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H2, hH2⟩ : ∃ H2 : Nat, (H2 : Int) = (2 * X) := ⟨Int.toNat (2 * X), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * X) := ⟨Int.toNat ((-4) * Q + 4 * X), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (2 * Q + (-1) * X + (-1)) := ⟨Int.toNat (2 * Q + (-1) * X + (-1)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = (2 * Q + 1 * X + (-2) * Y + 1) := ⟨Int.toNat (2 * Q + 1 * X + (-2) * Y + 1), by omega⟩
+  exact Red.m13 k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 H2 N s e (by unfold C13; omega) (by unfold AdmL; omega)
+
+theorem p00_76 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : Y ≥ Q ∧ (3 * Y) < (Q + (4 * X)) ∧ (((Q + X) + Y) / 2) < ((Q - X) + Y) ∧ (((Q + X) + Y) / 2) < (((2 * Q) + X) - Y)) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * X) := ⟨Int.toNat (2 * X), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (1 * Q + 5 * X + (-3) * Y) := ⟨Int.toNat (1 * Q + 5 * X + (-3) * Y), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-1) * Q + (-3) * X + 3 * Y) := ⟨Int.toNat ((-1) * Q + (-3) * X + 3 * Y), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (4 * Q + (-2) * X) := ⟨Int.toNat (4 * Q + (-2) * X), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (1 * Q + (-3) * X + 1 * Y + (-1)) := ⟨Int.toNat (1 * Q + (-3) * X + 1 * Y + (-1)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (3 * Q + 1 * X + (-1) * Y) := ⟨Int.toNat (3 * Q + 1 * X + (-1) * Y), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (2 * Q + 2 * X + (-2) * Y + (-1)) := ⟨Int.toNat (2 * Q + 2 * X + (-2) * Y + (-1)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-2) * Q + 2 * Y) := ⟨Int.toNat ((-2) * Q + 2 * Y), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-1) * Q + 1 * X + 1 * Y) := ⟨Int.toNat ((-1) * Q + 1 * X + 1 * Y), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
+
+theorem p00_77 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : (3 * Y) > ((5 * Q) - (4 * X)) ∧ ((2 * Q) - Y) ≤ (((Q + X) + Y) / 2) ∧ (((Q + X) + Y) / 2) < ((2 * Q) - X) ∧ (((Q + X) + Y) / 2) < ((3 * Q) - (2 * Y))) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * X) := ⟨Int.toNat (2 * X), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-5) * Q + 5 * X + 3 * Y) := ⟨Int.toNat ((-5) * Q + 5 * X + 3 * Y), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (5 * Q + (-3) * X + (-3) * Y) := ⟨Int.toNat (5 * Q + (-3) * X + (-3) * Y), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (4 * Q + (-2) * X) := ⟨Int.toNat (4 * Q + (-2) * X), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (3 * Q + (-3) * X + (-1) * Y + (-1)) := ⟨Int.toNat (3 * Q + (-3) * X + (-1) * Y + (-1)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (1 * Q + 1 * X + 1 * Y) := ⟨Int.toNat (1 * Q + 1 * X + 1 * Y), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-2) * Q + 2 * X + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * Q + 2 * X + 2 * Y + (-1)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (2 * Q + (-2) * Y) := ⟨Int.toNat (2 * Q + (-2) * Y), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-3) * Q + 1 * X + 3 * Y) := ⟨Int.toNat ((-3) * Q + 1 * X + 3 * Y), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
+
+theorem p00_79 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : Y ≤ Q ∧ (3 * Y) > ((5 * Q) - (4 * X)) ∧ (((Q + X) + Y) / 2) < (((-(2 * Q)) + X) + (3 * Y)) ∧ (((Q + X) + Y) / 2) < ((2 * Q) - X)) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (2 * X) := ⟨Int.toNat (2 * X), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = ((-5) * Q + 5 * X + 3 * Y) := ⟨Int.toNat ((-5) * Q + 5 * X + 3 * Y), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = (5 * Q + (-3) * X + (-3) * Y) := ⟨Int.toNat (5 * Q + (-3) * X + (-3) * Y), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (4 * Q + (-2) * X) := ⟨Int.toNat (4 * Q + (-2) * X), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (3 * Q + (-3) * X + (-1) * Y + (-1)) := ⟨Int.toNat (3 * Q + (-3) * X + (-1) * Y + (-1)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (1 * Q + 1 * X + 1 * Y) := ⟨Int.toNat (1 * Q + 1 * X + 1 * Y), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-2) * Q + 2 * X + 2 * Y + (-1)) := ⟨Int.toNat ((-2) * Q + 2 * X + 2 * Y + (-1)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (2 * Q + (-2) * Y) := ⟨Int.toNat (2 * Q + (-2) * Y), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-3) * Q + 1 * X + 3 * Y) := ⟨Int.toNat ((-3) * Q + 1 * X + 3 * Y), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
+
+theorem p00_82 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : Y ≥ (((-7) + (5 * Q)) - (5 * X)) ∧ X < Y ∧ Y ≤ ((4 - (3 * Q)) + (5 * X)) ∧ Y < Q) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (3 * Q + (-3) * X + 1 * Y + (-4)) := ⟨Int.toNat (3 * Q + (-3) * X + 1 * Y + (-4)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + (-4) * X + (-6)) := ⟨Int.toNat (4 * Q + (-4) * X + (-6)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-1) * Q + 1 * X + 1 * Y + 2) := ⟨Int.toNat ((-1) * Q + 1 * X + 1 * Y + 2), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (1 * Q + 3 * X + (-1) * Y + 4) := ⟨Int.toNat (1 * Q + 3 * X + (-1) * Y + 4), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-3) * Q + 5 * X + (-1) * Y + 5) := ⟨Int.toNat ((-3) * Q + 5 * X + (-1) * Y + 5), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-3) * Q + 5 * X + (-1) * Y + 4) := ⟨Int.toNat ((-3) * Q + 5 * X + (-1) * Y + 4), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X + (-2)) := ⟨Int.toNat (4 * Q + (-2) * X + (-2)), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X + (-5)) := ⟨Int.toNat (4 * Q + (-4) * X + (-5)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = (2 * Q + (-4) * X + 2 * Y + (-4)) := ⟨Int.toNat (2 * Q + (-4) * X + 2 * Y + (-4)), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + (-2)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-2)), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
+
+theorem p00_83 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : Y ≥ (((-9) + (7 * Q)) - (7 * X)) ∧ Q ≤ Y ∧ Y ≤ (((-2) + (2 * Q)) - X)) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = (1 * Q + (-1) * X + 1 * Y + (-2)) := ⟨Int.toNat (1 * Q + (-1) * X + 1 * Y + (-2)), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (4 * Q + (-4) * X + (-6)) := ⟨Int.toNat (4 * Q + (-4) * X + (-6)), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-3) * Q + 3 * X + 1 * Y + 4) := ⟨Int.toNat ((-3) * Q + 3 * X + 1 * Y + 4), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (3 * Q + 1 * X + (-1) * Y + 2) := ⟨Int.toNat (3 * Q + 1 * X + (-1) * Y + 2), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = ((-1) * Q + 3 * X + (-1) * Y + 3) := ⟨Int.toNat ((-1) * Q + 3 * X + (-1) * Y + 3), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = ((-1) * Q + 3 * X + (-1) * Y + 2) := ⟨Int.toNat ((-1) * Q + 3 * X + (-1) * Y + 2), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (4 * Q + (-2) * X + (-2)) := ⟨Int.toNat (4 * Q + (-2) * X + (-2)), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = (4 * Q + (-4) * X + (-5)) := ⟨Int.toNat (4 * Q + (-4) * X + (-5)), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-2) * Q + 2 * Y) := ⟨Int.toNat ((-2) * Q + 2 * Y), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * X + 2 * Y + (-2)) := ⟨Int.toNat ((-2) * X + 2 * Y + (-2)), by omega⟩
+  exact Red.m4 k0 A0 B0 H0 k1 A1 H1 N s e (by unfold C4; omega) (by unfold AdmL; omega)
+
+theorem p00_86 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : X ≥ Q ∧ Y > X ∧ (3 * Y) ≤ (((-2) + (5 * Q)) - X) ∧ (7 * Y) > ((7 * Q) + X)) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-1) * Q + 1 * X + 1 * Y) := ⟨Int.toNat ((-1) * Q + 1 * X + 1 * Y), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (3 * Q + 1 * X + (-3) * Y) := ⟨Int.toNat (3 * Q + 1 * X + (-3) * Y), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-4) * Q + 4 * Y) := ⟨Int.toNat ((-4) * Q + 4 * Y), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (5 * Q + (-1) * X + (-1) * Y) := ⟨Int.toNat (5 * Q + (-1) * X + (-1) * Y), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (5 * Q + (-1) * X + (-3) * Y + (-1)) := ⟨Int.toNat (5 * Q + (-1) * X + (-3) * Y + (-1)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (5 * Q + (-1) * X + (-3) * Y + (-1)) := ⟨Int.toNat (5 * Q + (-1) * X + (-3) * Y + (-1)), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y) := ⟨Int.toNat (2 * Y), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y) := ⟨Int.toNat ((-4) * Q + 4 * Y), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 2 * X + 2 * Y + 1) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y + 1), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-2) * Q + 2 * X + 1) := ⟨Int.toNat ((-2) * Q + 2 * X + 1), by omega⟩
+  exact Red.m3 k0 A0 B0 H0 k1 A1 B1 H1 N s e (by unfold C3; omega) (by unfold AdmL; omega)
+
+theorem p00_89 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
+    (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
+    (hD : X < Q ∧ Y ≥ ((2 * Q) - X) ∧ (5 * Y) < ((5 * Q) + X)) : Red n a b := by
+  obtain ⟨k0, hk0⟩ : ∃ k0 : Nat, (k0 : Int) = ((-3) * Q + 1 * X + 3 * Y) := ⟨Int.toNat ((-3) * Q + 1 * X + 3 * Y), by omega⟩
+  obtain ⟨A0, hA0⟩ : ∃ A0 : Nat, (A0 : Int) = (1 * Q + 1 * X + (-1) * Y) := ⟨Int.toNat (1 * Q + 1 * X + (-1) * Y), by omega⟩
+  obtain ⟨B0, hB0⟩ : ∃ B0 : Nat, (B0 : Int) = ((-4) * Q + 4 * Y) := ⟨Int.toNat ((-4) * Q + 4 * Y), by omega⟩
+  obtain ⟨H0, hH0⟩ : ∃ H0 : Nat, (H0 : Int) = (7 * Q + (-1) * X + (-3) * Y) := ⟨Int.toNat (7 * Q + (-1) * X + (-3) * Y), by omega⟩
+  obtain ⟨k1, hk1⟩ : ∃ k1 : Nat, (k1 : Int) = (7 * Q + (-1) * X + (-5) * Y + (-1)) := ⟨Int.toNat (7 * Q + (-1) * X + (-5) * Y + (-1)), by omega⟩
+  obtain ⟨A1, hA1⟩ : ∃ A1 : Nat, (A1 : Int) = (7 * Q + (-1) * X + (-5) * Y + (-1)) := ⟨Int.toNat (7 * Q + (-1) * X + (-5) * Y + (-1)), by omega⟩
+  obtain ⟨B1, hB1⟩ : ∃ B1 : Nat, (B1 : Int) = (0) := ⟨Int.toNat (0), by omega⟩
+  obtain ⟨H1, hH1⟩ : ∃ H1 : Nat, (H1 : Int) = (2 * Y) := ⟨Int.toNat (2 * Y), by omega⟩
+  obtain ⟨N, hN⟩ : ∃ N : Nat, (N : Int) = ((-4) * Q + 4 * Y) := ⟨Int.toNat ((-4) * Q + 4 * Y), by omega⟩
+  obtain ⟨s, hs⟩ : ∃ s : Nat, (s : Int) = ((-4) * Q + 2 * X + 2 * Y + 1) := ⟨Int.toNat ((-4) * Q + 2 * X + 2 * Y + 1), by omega⟩
+  obtain ⟨e, he⟩ : ∃ e : Nat, (e : Int) = ((-6) * Q + 2 * X + 4 * Y + 1) := ⟨Int.toNat ((-6) * Q + 2 * X + 4 * Y + 1), by omega⟩
+  exact Red.m3 k0 A0 B0 H0 k1 A1 B1 H1 N s e (by unfold C3; omega) (by unfold AdmL; omega)
 
 theorem cover00 (n a b q x y : Nat) (hn : n = 4 * q + 0) (ha : a = 2 * x + 0)
     (hb : b = 2 * y + 0) (h42 : 42 ≤ n) (hab : a < b) (hadm : AdmL a b n) : Red n a b := by
@@ -386,116 +911,344 @@ theorem cover00 (n a b q x y : Nat) (hn : n = 4 * q + 0) (ha : a = 2 * x + 0)
     ·
       exact p00_2 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
     ·
-      by_cases h : Y ≤ ((-2) + (2 * Q))
+      by_cases h : (3 * Y) > ((5 * Q) - X)
       ·
-        by_cases h : (3 * Y) ≥ ((6 * Q) - (4 * X))
-        ·
-          by_cases h : (3 * Y) > ((3 * Q) + X)
-          ·
-            exact p00_25 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
-          ·
-            exact p00_4 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
-        ·
-          exact p00_4 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+        exact p00_27 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
       ·
-        exact p00_1 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+        by_cases h : Y ≥ ((2 * Q) - X)
+        ·
+          by_cases h : (4 * Y) ≤ (((-2) + (8 * Q)) - (3 * X))
+          ·
+            exact p00_13 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+          ·
+            exact p00_1 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+        ·
+          by_cases h : (3 * Y) ≥ ((6 * Q) - (4 * X))
+          ·
+            by_cases h : (3 * Y) > ((3 * Q) + X)
+            ·
+              exact p00_26 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+            ·
+              by_cases h : ((2 + (4 * Q)) - X) ≤ (3 * Y)
+              ·
+                by_cases h : (9 * Y) ≤ ((3 + (13 * Q)) - (3 * X))
+                ·
+                  exact p00_22 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                ·
+                  by_cases h : (((-1) + (3 * Q)) + X) ≤ (3 * Y)
+                  ·
+                    exact p00_61 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                  ·
+                    by_cases h : (9 * Y) ≥ ((5 + (13 * Q)) - (3 * X))
+                    ·
+                      exact p00_20 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                    ·
+                      by_cases h : Y ≤ ((3 - Q) + (3 * X))
+                      ·
+                        by_cases h : Y ≤ (((-7) + (5 * Q)) - (5 * X))
+                        ·
+                          exact p00_30 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                        ·
+                          exact p00_56 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                      ·
+                        by_cases h : (3 * Y) ≤ (((-5) + (3 * Q)) + X)
+                        ·
+                          exact p00_50 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                        ·
+                          exact p00_76 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+              ·
+                exact p00_76 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+          ·
+            by_cases h : (3 * Y) < (Q + (4 * X))
+            ·
+              exact p00_76 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+            ·
+              by_cases h : Y ≤ ((3 * Q) - (3 * X))
+              ·
+                exact p00_40 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+              ·
+                exact p00_22 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
   ·
     by_cases h : (3 * Y) > ((5 * Q) - X)
     ·
       by_cases h : (3 * Y) ≥ ((2 + (3 * Q)) + X)
       ·
-        exact p00_26 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+        exact p00_27 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
       ·
         by_cases h : Y ≥ ((5 * Q) - (3 * X))
         ·
           by_cases h : (2 * Y) ≤ ((3 - Q) + (3 * X))
           ·
-            exact p00_22 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+            exact p00_23 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
           ·
             by_cases h : (((-1) + (3 * Q)) + X) ≤ (3 * Y)
             ·
-              exact p00_64 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+              exact p00_62 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
             ·
               by_cases h : (((-(2 * Q)) + (2 * X)) + Y) ≤ (((Q + X) + Y) / 2)
               ·
-                exact p00_47 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                exact p00_49 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
               ·
-                by_cases h : (2 * Y) ≤ ((4 - Q) + (3 * X))
-                ·
-                  exact p00_65 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
-                ·
-                  exact p00_67 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                exact p00_73 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
         ·
-          by_cases h : (3 * Y) ≥ ((6 - (7 * Q)) + (9 * X))
+          by_cases h : X > Q
           ·
-            exact p00_7 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
-          ·
-            exact p00_47 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
-    ·
-      by_cases h : Y ≤ Q
-      ·
-        by_cases h : (9 * Y) ≥ ((6 + (5 * Q)) + (3 * X))
-        ·
-          exact p00_9 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
-        ·
-          by_cases h : (9 * Y) ≤ ((4 + (5 * Q)) + (3 * X))
-          ·
-            exact p00_10 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
-          ·
-            exact p00_54 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
-      ·
-        by_cases h : Y < ((-Q) + (3 * X))
-        ·
-          by_cases h : (9 * Y) ≤ ((3 + (13 * Q)) - (3 * X))
-          ·
-            exact p00_18 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
-          ·
-            by_cases h : X ≥ Q
+            by_cases h : Y ≤ ((1 - (2 * Q)) + (3 * X))
             ·
               by_cases h : (3 * Y) ≥ ((6 - (7 * Q)) + (9 * X))
               ·
-                exact p00_7 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                exact p00_8 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
               ·
-                by_cases h : (3 * Y) ≤ ((4 - (7 * Q)) + (9 * X))
+                exact p00_49 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+            ·
+              by_cases h : ((-Q) + (2 * Y)) ≤ (((Q + X) + Y) / 2)
+              ·
+                exact p00_48 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+              ·
+                exact p00_1 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+          ·
+            exact p00_1 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+    ·
+      by_cases h : (5 * X) ≤ ((-4) + (4 * Q))
+      ·
+        by_cases h : Y ≥ (((-1) + (3 * Q)) - (3 * X))
+        ·
+          by_cases h : ((2 - (3 * Q)) + (5 * X)) ≤ Y
+          ·
+            by_cases h : Y ≤ (((-3) + (5 * Q)) - (5 * X))
+            ·
+              exact p00_64 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+            ·
+              by_cases h : Y < ((2 * Q) - X)
+              ·
+                exact p00_4 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+              ·
+                by_cases h : (((Q + X) + Y) / 2) < ((-Q) + (2 * Y))
                 ·
-                  exact p00_8 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                  exact p00_29 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
                 ·
-                  by_cases h : (7 * Y) ≤ ((9 + (7 * Q)) + X)
+                  by_cases h : (5 * Y) ≥ (((-1) + (7 * Q)) - X)
                   ·
-                    exact p00_33 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                    exact p00_54 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                  ·
+                    exact p00_43 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+          ·
+            exact p00_71 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+        ·
+          by_cases h : (2 * Y) ≤ (((-2) + Q) + X)
+          ·
+            by_cases h : (3 * Y) < ((3 * Q) - X)
+            ·
+              exact p00_47 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+            ·
+              by_cases h : (3 * Y) > ((5 * Q) - (4 * X))
+              ·
+                exact p00_77 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+              ·
+                by_cases h : (3 * Y) ≤ ((3 * Q) - X)
+                ·
+                  exact p00_18 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                ·
+                  by_cases h : (9 * Y) ≥ ((6 + (5 * Q)) + (3 * X))
+                  ·
+                    exact p00_11 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                  ·
+                    exact p00_53 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+          ·
+            by_cases h : ((3 * Q) - X) ≤ (3 * Y)
+            ·
+              by_cases h : (3 * Y) ≤ ((2 * Q) + X)
+              ·
+                exact p00_53 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+              ·
+                exact p00_79 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+            ·
+              by_cases h : ((2 * Q) - X) < (2 * Y)
+              ·
+                by_cases h : (2 * Y) < (Q + X)
+                ·
+                  exact p00_18 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                ·
+                  exact p00_41 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+              ·
+                exact p00_41 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+      ·
+        by_cases h : X ≤ Q
+        ·
+          by_cases h : Y > ((2 * Q) - X)
+          ·
+            by_cases h : (3 * Y) ≤ ((1 + (3 * Q)) + X)
+            ·
+              by_cases h : (7 * Y) ≥ ((6 + (9 * Q)) - X)
+              ·
+                exact p00_6 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+              ·
+                by_cases h : (7 * Y) ≤ ((4 + (9 * Q)) - X)
+                ·
+                  exact p00_5 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                ·
+                  by_cases h : X < Q
+                  ·
+                    by_cases h : Y ≤ ((4 * Q) - (3 * X))
+                    ·
+                      exact p00_44 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                    ·
+                      exact p00_89 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
                   ·
                     exact p00_32 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
             ·
-              by_cases h : Y > ((2 * Q) - X)
+              by_cases h : (((Q + X) + Y) / 2) ≤ ((((-2) + (2 * Q)) - (2 * X)) + Y)
               ·
-                by_cases h : (3 * Y) ≤ ((1 + (3 * Q)) + X)
-                ·
-                  by_cases h : (7 * Y) ≥ ((6 + (9 * Q)) - X)
-                  ·
-                    exact p00_6 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
-                  ·
-                    exact p00_42 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
-                ·
-                  exact p00_25 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                exact p00_29 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
               ·
-                by_cases h : (9 * Y) ≥ ((5 + (13 * Q)) - (3 * X))
+                by_cases h : (((Q + X) + Y) / 2) ≤ ((-Q) + (3 * X))
                 ·
-                  exact p00_20 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                  exact p00_28 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
                 ·
-                  by_cases h : Y ≥ ((2 + (5 * Q)) - (5 * X))
+                  exact p00_45 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+          ·
+            by_cases h : Y ≥ ((2 + (3 * Q)) - (3 * X))
+            ·
+              by_cases h : Y ≤ Q
+              ·
+                by_cases h : (3 * Y) ≤ ((3 + (2 * Q)) + X)
+                ·
+                  by_cases h : (9 * Y) ≥ ((11 + (5 * Q)) + (3 * X))
                   ·
-                    exact p00_43 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                    exact p00_39 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
                   ·
-                    exact p00_4 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                    by_cases h : (9 * Y) > ((5 * Q) + (3 * X))
+                    ·
+                      exact p00_53 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                    ·
+                      exact p00_10 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                ·
+                  by_cases h : Q ≤ Y
+                  ·
+                    by_cases h : Y ≤ (((-6) + (7 * Q)) - (7 * X))
+                    ·
+                      exact p00_4 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                    ·
+                      exact p00_83 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                  ·
+                    by_cases h : (5 * X) ≤ ((-3) + (4 * Q))
+                    ·
+                      by_cases h : ((-(3 * Q)) + (5 * X)) < Y
+                      ·
+                        exact p00_65 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                      ·
+                        by_cases h : ((-(3 * Q)) + (5 * X)) ≤ Y
+                        ·
+                          exact p00_68 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                        ·
+                          exact p00_71 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                    ·
+                      by_cases h : (5 * X) ≤ ((-2) + (4 * Q))
+                      ·
+                        by_cases h : ((-1) + Q) ≤ Y
+                        ·
+                          exact p00_67 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                        ·
+                          by_cases h : Y ≤ (((-5) + (5 * Q)) - (5 * X))
+                          ·
+                            exact p00_71 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                          ·
+                            exact p00_82 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                      ·
+                        by_cases h : (5 * X) ≤ ((-1) + (4 * Q))
+                        ·
+                          by_cases h : ((-1) + Q) ≤ Y
+                          ·
+                            exact p00_70 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                          ·
+                            by_cases h : Y ≤ (((-5) + (5 * Q)) - (5 * X))
+                            ·
+                              exact p00_71 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                            ·
+                              by_cases h : Y ≥ (((-3) + (5 * Q)) - (5 * X))
+                              ·
+                                exact p00_72 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                              ·
+                                exact p00_82 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                        ·
+                          by_cases h : Y ≤ (((-5) + (5 * Q)) - (5 * X))
+                          ·
+                            exact p00_71 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                          ·
+                            by_cases h : Y ≥ (((-3) + (5 * Q)) - (5 * X))
+                            ·
+                              exact p00_72 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                            ·
+                              exact p00_82 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+              ·
+                by_cases h : Y < ((-Q) + (3 * X))
+                ·
+                  by_cases h : (3 * Y) ≥ ((2 + (4 * Q)) - X)
+                  ·
+                    by_cases h : (9 * Y) ≤ ((3 + (13 * Q)) - (3 * X))
+                    ·
+                      exact p00_21 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                    ·
+                      by_cases h : Y ≥ ((2 * Q) - X)
+                      ·
+                        by_cases h : (3 * Y) ≤ (((-2) + (3 * Q)) + X)
+                        ·
+                          exact p00_43 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                        ·
+                          exact p00_19 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                      ·
+                        exact p00_4 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                  ·
+                    by_cases h : Y ≤ (((-2) + (2 * Q)) - X)
+                    ·
+                      by_cases h : (((-4) + (4 * Q)) - X) ≤ (3 * Y)
+                      ·
+                        by_cases h : (9 * Y) ≤ (((-14) + (13 * Q)) - (3 * X))
+                        ·
+                          exact p00_51 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                        ·
+                          exact p00_4 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                      ·
+                        by_cases h : Y ≥ (((-4) + (7 * Q)) - (7 * X))
+                        ·
+                          exact p00_3 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                        ·
+                          by_cases h : Y ≤ (((-6) + (7 * Q)) - (7 * X))
+                          ·
+                            exact p00_4 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                          ·
+                            exact p00_83 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                    ·
+                      exact p00_3 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                ·
+                  exact p00_54 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+            ·
+              exact p00_10 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
         ·
-          by_cases h : Y < ((2 * Q) - X)
+          by_cases h : Y ≤ ((1 - (2 * Q)) + (3 * X))
           ·
-            exact p00_4 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+            by_cases h : (3 * Y) ≥ ((6 - (7 * Q)) + (9 * X))
+            ·
+              exact p00_8 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+            ·
+              by_cases h : (3 * Y) ≤ ((4 - (7 * Q)) + (9 * X))
+              ·
+                exact p00_7 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+              ·
+                by_cases h : (7 * Y) ≤ ((9 + (7 * Q)) + X)
+                ·
+                  exact p00_34 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+                ·
+                  exact p00_33 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
           ·
-            by_cases h : (3 * Y) > ((3 * Q) + X)
+            by_cases h : (7 * Y) ≥ ((11 + (7 * Q)) + X)
             ·
-              exact p00_25 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+              exact p00_35 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
             ·
-              exact p00_55 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+              by_cases h : (7 * Y) > ((7 * Q) + X)
+              ·
+                exact p00_86 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
+              ·
+                exact p00_32 n a b q x y Q X Y hQ hX hY hn ha hb (by first | omega | lia | trivial)
 
 end Gvozdjak
