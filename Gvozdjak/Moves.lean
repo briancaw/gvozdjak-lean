@@ -40,6 +40,19 @@ theorem admissible_iff_admL {a b n : Nat} : Admissible a b n ↔ AdmL a b n := b
   generalize n * (n + 1) / 2 = T at h ⊢
   omega
 
+theorem ind_one {s k x : Nat} (h1 : s ≤ x) (h2 : x < s + k) : ind s k x = 1 := by
+  unfold ind; omega
+
+theorem ind_zero_lt {s k x : Nat} (h : x < s) : ind s k x = 0 := by
+  unfold ind; omega
+
+theorem ind_zero_ge {s k x : Nat} (h : s + k ≤ x) : ind s k x = 0 := by
+  unfold ind; omega
+
+/-- Evaluate every interval indicator in the goal, once the position of `x` is known. -/
+macro "ind_region" : tactic =>
+  `(tactic| (simp (disch := omega) only [ind_one, ind_zero_lt, ind_zero_ge] <;> omega))
+
 /-- A graceful labeling can be translated to start at any `lo`. -/
 theorem core_of {s e N : Nat} (h : ∃ p, IsGraceful s e N p) (lo : Nat) :
     ∃ p, Spec (lo + s) (lo + e) (ind lo (N + 1)) (ind 1 N) p := by
@@ -70,25 +83,25 @@ theorem move1 {n a b k0 A0 B0 H0 N s e : Nat} (h : C1 n a b k0 A0 B0 H0 N s e)
   obtain ⟨p1, h1⟩ := core_of hc (k0)
   refine ⟨_, isGraceful_iff_spec.mpr ((h1.append h0).congr (by omega) (by omega) ?_ ?_)⟩
   · intro x
-    simp only [ind]
+    try dsimp only
     rcases Nat.lt_or_ge x (k0) with hx0 | hx0
-    · omega
+    · ind_region
     rcases Nat.lt_or_ge x (H0) with hx1 | hx1
-    · omega
+    · ind_region
     rcases Nat.lt_or_ge x (n + 1) with hx2 | hx2
-    · omega
-    omega
+    · ind_region
+    ind_region
   · intro x
-    simp only [ind, adiff]
+    simp only [adiff]
     rcases Nat.lt_or_ge x (1) with hx0 | hx0
-    · omega
+    · ind_region
     rcases Nat.lt_or_ge x ((N + 1)) with hx1 | hx1
-    · omega
+    · ind_region
     rcases Nat.lt_or_ge x ((N + 1) + 1) with hx2 | hx2
-    · omega
+    · ind_region
     rcases Nat.lt_or_ge x (n + 1) with hx3 | hx3
-    · omega
-    omega
+    · ind_region
+    ind_region
 
 /-- Constraints of move 3: layers EH, EH. -/
 def C3 (n a b k0 A0 B0 H0 k1 A1 B1 H1 N s e : Nat) : Prop :=
@@ -117,33 +130,102 @@ theorem move3 {n a b k0 A0 B0 H0 k1 A1 B1 H1 N s e : Nat} (h : C3 n a b k0 A0 B0
   obtain ⟨p2, h2⟩ := core_of hc (k0 + k1)
   refine ⟨_, isGraceful_iff_spec.mpr (((h2.append h0).append h1).congr (by omega) (by omega) ?_ ?_)⟩
   · intro x
-    simp only [ind]
+    try dsimp only
     rcases Nat.lt_or_ge x (k0) with hx0 | hx0
-    · omega
+    · ind_region
     rcases Nat.lt_or_ge x (k0 + k1) with hx1 | hx1
-    · omega
+    · ind_region
     rcases Nat.lt_or_ge x (H1) with hx2 | hx2
-    · omega
+    · ind_region
     rcases Nat.lt_or_ge x (H0) with hx3 | hx3
-    · omega
+    · ind_region
     rcases Nat.lt_or_ge x (n + 1) with hx4 | hx4
-    · omega
-    omega
+    · ind_region
+    ind_region
   · intro x
-    simp only [ind, adiff]
+    simp only [adiff]
     rcases Nat.lt_or_ge x (1) with hx0 | hx0
-    · omega
+    · ind_region
     rcases Nat.lt_or_ge x ((N + 1)) with hx1 | hx1
-    · omega
+    · ind_region
     rcases Nat.lt_or_ge x ((N + 1) + 1) with hx2 | hx2
-    · omega
+    · ind_region
     rcases Nat.lt_or_ge x ((2 * k1 + 1) + (N + 1)) with hx3 | hx3
-    · omega
+    · ind_region
     rcases Nat.lt_or_ge x ((2 * k1 + 1) + (N + 1) + 1) with hx4 | hx4
-    · omega
+    · ind_region
     rcases Nat.lt_or_ge x (n + 1) with hx5 | hx5
-    · omega
-    omega
+    · ind_region
+    ind_region
+
+/-- Constraints of move 12: layers EH, EH, EL. -/
+def C12 (n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 B2 H2 N s e : Nat) : Prop :=
+  1 ≤ k0 ∧
+  A0 + B0 = k0 ∧
+  A0 ≠ B0 ∧
+  1 ≤ k1 ∧
+  A1 + B1 = k1 ∧
+  A1 ≠ B1 ∧
+  1 ≤ k2 ∧
+  A2 + B2 = k2 ∧
+  A2 ≠ B2 ∧
+  1 ≤ N ∧
+  H0 + ((k0 + 1)) = n + 1 ∧
+  H1 + ((k0 + 1) + (k1 + 1)) = n + 1 ∧
+  H2 + ((k0 + 1) + (k1 + 1) + k2) = n + 1 ∧
+  n + 1 = (2 * k0 + 1) + (2 * k1 + 1) + (2 * k2 + 1) + (N + 1) ∧
+  a = k0 + k1 + A2 ∧
+  b = H1 + B1 ∧
+  k0 + k1 + B2 + ((2 * k1 + 1) + (2 * k2 + 1) + (N + 1)) = H0 + A0 ∧
+  H0 + B0 = k0 + k1 + (k2 + 1) + s + ((2 * k2 + 1) + (N + 1)) ∧
+  k0 + k1 + (k2 + 1) + e + ((N + 1)) = H1 + A1
+
+set_option maxHeartbeats 200000 in
+theorem move12 {n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 B2 H2 N s e : Nat} (h : C12 n a b k0 A0 B0 H0 k1 A1 B1 H1 k2 A2 B2 H2 N s e)
+    (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by
+  unfold C12 at h
+  obtain ⟨c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18⟩ := h
+  obtain ⟨p0, h0⟩ := hasEH' (κ := k0) (A := A0) (B := B0) (lo := 0) (hi := H0) (g := (2 * k1 + 1) + (2 * k2 + 1) + (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p1, h1⟩ := hasEH' (κ := k1) (A := A1) (B := B1) (lo := k0) (hi := H1) (g := (2 * k2 + 1) + (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p2, h2⟩ := hasEL' (κ := k2) (A := A2) (B := B2) (lo := k0 + k1) (hi := H2) (g := (N + 1) + 1) (by omega) (by omega) (by omega) (by omega) (by omega)
+  obtain ⟨p3, h3⟩ := core_of hc (k0 + k1 + (k2 + 1))
+  refine ⟨_, isGraceful_iff_spec.mpr ((((h2.append h0).append h3).append h1).congr (by omega) (by omega) ?_ ?_)⟩
+  · intro x
+    try dsimp only
+    rcases Nat.lt_or_ge x (k0) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x (k0 + k1) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x (k0 + k1 + (k2 + 1)) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x (H2) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x (H1) with hx4 | hx4
+    · ind_region
+    rcases Nat.lt_or_ge x (H0) with hx5 | hx5
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx6 | hx6
+    · ind_region
+    ind_region
+  · intro x
+    simp only [adiff]
+    rcases Nat.lt_or_ge x (1) with hx0 | hx0
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1)) with hx1 | hx1
+    · ind_region
+    rcases Nat.lt_or_ge x ((N + 1) + 1) with hx2 | hx2
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k2 + 1) + (N + 1)) with hx3 | hx3
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k2 + 1) + (N + 1) + 1) with hx4 | hx4
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 1) + (2 * k2 + 1) + (N + 1)) with hx5 | hx5
+    · ind_region
+    rcases Nat.lt_or_ge x ((2 * k1 + 1) + (2 * k2 + 1) + (N + 1) + 1) with hx6 | hx6
+    · ind_region
+    rcases Nat.lt_or_ge x (n + 1) with hx7 | hx7
+    · ind_region
+    ind_region
 
 
 end Gvozdjak
