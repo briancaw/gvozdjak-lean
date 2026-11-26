@@ -3,8 +3,10 @@
 Work in progress: a Lean 4 formalization of a claimed proof of Gvozdjak's 2004
 conjecture on graceful labelings of paths with prescribed end labels.
 
-**Status: nothing is proved here yet.** The repository currently contains only the
-formal statement (`Gvozdjak/Statement.lean`); the main theorem is marked `sorry`.
+**Status: the conjecture is not proved here yet.** The repository contains the
+formal statement (`Gvozdjak/Statement.lean`), whose main theorem is still marked
+`sorry`, and the 39 explicit base-case labelings (`Gvozdjak/BaseCases.lean`),
+each checked by Lean's kernel.
 The underlying paper proof is computer-assisted and has not been checked by a
 combinatorialist.
 
