@@ -10,8 +10,18 @@ import Gvozdjak.Statement
 
 namespace Gvozdjak
 
-/-- Indicator of the interval `[s, s + k)`. -/
-def ind (s k x : Nat) : Nat := if s ≤ x ∧ x < s + k then 1 else 0
+/-- Indicator of the interval `[s, s + k)`, written with `min`/`max` so that `omega`
+can reason about it. -/
+def ind (s k x : Nat) : Nat := min (x + 1) (s + k) - max x s
+
+theorem ite_eq_ind (s k x : Nat) : (if s ≤ x ∧ x < s + k then 1 else 0) = ind s k x := by
+  unfold ind; split <;> omega
+
+theorem ite_eq_ind_one (w d : Nat) : (if w = d then 1 else 0) = ind w 1 d := by
+  unfold ind; split <;> omega
+
+theorem ite_lt_eq_ind (n x : Nat) : (if x < n then 1 else 0) = ind 0 n x := by
+  unfold ind; split <;> omega
 
 theorem adiff_comm (x y : Nat) : adiff x y = adiff y x := by
   unfold adiff; omega
@@ -33,7 +43,7 @@ theorem diffs_append_cons {v u : Nat} :
   | x :: y :: p', q, h => by
       have h' : (y :: p').getLast? = some v := by
         rw [List.getLast?_cons_cons] at h; exact h
-      have ih := diffs_append_cons (y :: p') q h'
+      have ih := @diffs_append_cons v u (y :: p') q h'
       show adiff x y :: diffs ((y :: p') ++ u :: q) = _
       rw [ih]
       rfl
@@ -53,7 +63,7 @@ theorem count_map_add (lo x : Nat) :
   | [] => by simp
   | y :: t => by
       simp only [List.map_cons, List.count_cons, count_map_add lo x t, beq_iff_eq]
-      omega
+      (repeat' split) <;> omega
 
 theorem diffs_map_add (lo : Nat) : ∀ p : List Nat, diffs (p.map (lo + ·)) = diffs p
   | [] => rfl
@@ -72,7 +82,7 @@ theorem count_map_sub (c x : Nat) :
       have hy : y ≤ c := h y (by simp)
       have ih := count_map_sub c x t (fun z hz => h z (by simp [hz]))
       simp only [List.map_cons, List.count_cons, ih, beq_iff_eq]
-      omega
+      (repeat' split) <;> omega
 
 theorem diffs_map_sub (c : Nat) :
     ∀ p : List Nat, (∀ y, y ∈ p → y ≤ c) → diffs (p.map (c - ·)) = diffs p
@@ -105,7 +115,7 @@ theorem congr {u v u' v' : Nat} {cv cd cv' cd' : Nat → Nat} {p : List Nat}
 theorem append {u v u' v' : Nat} {cv cd cv' cd' : Nat → Nat} {p q : List Nat}
     (h1 : Spec u v cv cd p) (h2 : Spec u' v' cv' cd' q) :
     Spec u v' (fun x => cv x + cv' x)
-      (fun d => cd d + cd' d + (if adiff v u' = d then 1 else 0)) (p ++ q) := by
+      (fun d => cd d + cd' d + ind (adiff v u') 1 d) (p ++ q) := by
   obtain ⟨q', rfl⟩ := List.head?_eq_some_iff.mp h2.hd
   refine ⟨?_, ?_, ?_, ?_⟩
   · rw [List.head?_append, h1.hd]; rfl
@@ -115,7 +125,7 @@ theorem append {u v u' v' : Nat} {cv cd cv' cd' : Nat → Nat} {p q : List Nat}
   · intro d
     have e2 := h2.dcnt d
     rw [diffs_append_cons _ _ h1.lt, List.count_append, List.count_cons, h1.dcnt, e2]
-    simp only [beq_iff_eq]
+    simp only [beq_iff_eq, ite_eq_ind_one]
     omega
 
 theorem reverse {u v : Nat} {cv cd : Nat → Nat} {p : List Nat}
@@ -152,7 +162,7 @@ theorem reflect {u v : Nat} {cv cd : Nat → Nat} {p : List Nat}
 theorem single (x : Nat) : Spec x x (ind x 1) (fun _ => 0) [x] := by
   refine ⟨rfl, rfl, ?_, ?_⟩
   · intro y
-    simp only [List.count_cons, List.count_nil, beq_iff_eq, ind]
+    simp only [List.count_cons, List.count_nil, beq_iff_eq, ite_eq_ind_one]
     omega
   · intro d; rfl
 
@@ -165,18 +175,14 @@ theorem isGraceful_iff_spec {a b n : Nat} {p : List Nat} :
   · rintro ⟨h1, h2, h3, h4⟩
     refine ⟨h1, h2, ?_, ?_⟩
     · intro x
-      rw [h3.count_eq x, List.count_range]
-      simp only [ind]; omega
+      rw [h3.count_eq x, List.count_range, ite_lt_eq_ind]
     · intro d
-      rw [h4.count_eq d, List.count_range_1']
-      rfl
+      rw [h4.count_eq d, List.count_range_1', ite_eq_ind]
   · intro h
     refine ⟨h.hd, h.lt, ?_, ?_⟩
     · refine List.perm_iff_count.mpr (fun x => ?_)
-      rw [h.cnt x, List.count_range]
-      simp only [ind]; omega
+      rw [h.cnt x, List.count_range, ite_lt_eq_ind]
     · refine List.perm_iff_count.mpr (fun d => ?_)
-      rw [h.dcnt d, List.count_range_1']
-      rfl
+      rw [h.dcnt d, List.count_range_1', ite_eq_ind]
 
 end Gvozdjak
