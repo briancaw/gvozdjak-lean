@@ -1,8 +1,8 @@
 /-
 Gvozdjak's conjecture on graceful labelings of paths with prescribed end labels.
 
-STATUS: statement only. This file has NOT been compiled yet.
-It uses core Lean only (no Mathlib), so that the final proof has no dependencies.
+This file contains only the definitions and the statement; it is the file to read to
+check what has been proved.  The project uses core Lean only (no Mathlib).
 -/
 
 namespace Gvozdjak
@@ -40,9 +40,10 @@ example : IsGraceful 0 2 4 [0, 4, 1, 3, 2] := by
 
 /-- **Gvozdjak's conjecture.** For `n ≥ 1`, an `(a, b; n)`-graceful labeling exists
 if and only if `(a, b; n)` is admissible.  (`n = 0` is excluded: the one-vertex path
-has `a = b = 0`, which (C2) forbids.) -/
-theorem gvozdjak (a b n : Nat) (hn : 1 ≤ n) :
-    (∃ p, IsGraceful a b n p) ↔ Admissible a b n := by
-  sorry
+has `a = b = 0`, which (C2) forbids.)
+
+It is proved in `Gvozdjak/Main.lean` as `Gvozdjak.gvozdjak`. -/
+def GvozdjakConjecture : Prop :=
+  ∀ a b n : Nat, 1 ≤ n → ((∃ p, IsGraceful a b n p) ↔ Admissible a b n)
 
 end Gvozdjak
