@@ -32,6 +32,7 @@ def LayersAt (κ : Nat) : Prop :=
   (∀ A lo hi, 1 ≤ κ → A ≤ κ → 2 * A ≠ κ → lo + κ + 1 ≤ hi → HasEL κ A lo hi) ∧
   (∀ A lo hi, 1 ≤ κ → A ≤ κ → 2 * A ≠ κ → lo + κ ≤ hi → HasEH κ A lo hi)
 
+set_option maxHeartbeats 0 in
 theorem layersAt (κ : Nat) : LayersAt κ := by
   refine Nat.strongRecOn κ ?_
   intro κ ih
