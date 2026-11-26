@@ -3,3 +3,4 @@ import Gvozdjak.BaseCases
 import Gvozdjak.Basic
 import Gvozdjak.Layers
 import Gvozdjak.Moves
+import Gvozdjak.Reduction00
