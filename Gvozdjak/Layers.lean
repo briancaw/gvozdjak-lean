@@ -141,4 +141,31 @@ theorem hasEH {κ A lo hi : Nat} (h0 : 1 ≤ κ) (h1 : A ≤ κ) (h2 : 2 * A ≠
     (h3 : lo + κ ≤ hi) : HasEH κ A lo hi :=
   (layersAt κ).2.2 A lo hi h0 h1 h2 h3
 
+/-! Subtraction-free restatements, convenient for `omega`. -/
+
+theorem hasO' {κ A lo hi g : Nat} (h1 : A ≤ κ) (hg : hi = lo + κ + g) (hg1 : 1 ≤ g) :
+    ∃ p, Spec (lo + A) (hi + A) (fun x => ind lo (κ + 1) x + ind hi (κ + 1) x)
+      (ind g (2 * κ + 1)) p := by
+  obtain ⟨p, hp⟩ := hasO (κ := κ) (A := A) (lo := lo) (hi := hi) h1 (by omega)
+  have e : hi - lo - κ = g := by omega
+  exact ⟨p, hp.congr rfl rfl (fun _ => rfl) (fun d => by rw [e])⟩
+
+theorem hasEL' {κ A B lo hi g : Nat} (h0 : 1 ≤ κ) (hAB : A + B = κ) (hne : A ≠ B)
+    (hg : hi = lo + κ + g) (hg1 : 1 ≤ g) :
+    ∃ p, Spec (lo + A) (lo + B) (fun x => ind lo (κ + 1) x + ind hi κ x)
+      (ind g (2 * κ)) p := by
+  obtain ⟨p, hp⟩ := hasEL (κ := κ) (A := A) (lo := lo) (hi := hi) h0 (by omega) (by omega)
+    (by omega)
+  have e : hi - lo - κ = g := by omega
+  exact ⟨p, hp.congr rfl (by omega) (fun _ => rfl) (fun d => by rw [e])⟩
+
+theorem hasEH' {κ A B lo hi g : Nat} (h0 : 1 ≤ κ) (hAB : A + B = κ) (hne : A ≠ B)
+    (hg : hi + 1 = lo + κ + g) (hg1 : 1 ≤ g) :
+    ∃ p, Spec (hi + A) (hi + B) (fun x => ind lo κ x + ind hi (κ + 1) x)
+      (ind g (2 * κ)) p := by
+  obtain ⟨p, hp⟩ := hasEH (κ := κ) (A := A) (lo := lo) (hi := hi) h0 (by omega) (by omega)
+    (by omega)
+  have e : hi - lo - κ + 1 = g := by omega
+  exact ⟨p, hp.congr rfl (by omega) (fun _ => rfl) (fun d => by rw [e])⟩
+
 end Gvozdjak

@@ -8,21 +8,22 @@ def info(sig):
     types,perm,ors,hops=sig; r=len(types); assert types[-1]=='C'
     ell=[];h=[];size=[];params=[];rng=[]
     for i,t in enumerate(types):
-        k=f"k{i}";A=f"A{i}"
-        if t=='O': params+=[k,A]; rng+=[f"{A} ≤ {k}"]; ell.append(f"({k} + 1)");h.append(f"({k} + 1)");size.append(f"(2 * {k} + 2)")
-        elif t=='EL': params+=[k,A]; rng+=[f"1 ≤ {k}",f"{A} ≤ {k}",f"2 * {A} ≠ {k}"]; ell.append(f"({k} + 1)");h.append(k);size.append(f"(2 * {k} + 1)")
-        elif t=='EH': params+=[k,A]; rng+=[f"1 ≤ {k}",f"{A} ≤ {k}",f"2 * {A} ≠ {k}"]; ell.append(k);h.append(f"({k} + 1)");size.append(f"(2 * {k} + 1)")
-        elif t=='SH': ell.append("0");h.append("1");size.append("1")
+        k=f"k{i}";A=f"A{i}";B=f"B{i}";H=f"H{i}"
+        if t=='O': params+=[k,A,H]; rng+=[f"{A} ≤ {k}"]; ell.append(f"({k} + 1)");h.append(f"({k} + 1)");size.append(f"(2 * {k} + 2)")
+        elif t=='EL': params+=[k,A,B,H]; rng+=[f"1 ≤ {k}",f"{A} + {B} = {k}",f"{A} ≠ {B}"]; ell.append(f"({k} + 1)");h.append(k);size.append(f"(2 * {k} + 1)")
+        elif t=='EH': params+=[k,A,B,H]; rng+=[f"1 ≤ {k}",f"{A} + {B} = {k}",f"{A} ≠ {B}"]; ell.append(k);h.append(f"({k} + 1)");size.append(f"(2 * {k} + 1)")
+        elif t=='SH': params+=[H]; ell.append("0");h.append("1");size.append("1")
         elif t=='C': params+=["N","s","e"]; rng+=["1 ≤ N"]; ell.append("(N + 1)");h.append("0");size.append("(N + 1)")
         else: raise Exception(t)
     Lo=[plus(ell[:i]) for i in range(r)]
-    Hi=[f"(n + 1 - ({plus(h[:i+1])}))" for i in range(r)]
+    Hi=[f"H{i}" for i in range(r)]
     g=[plus(size[i+1:]) for i in range(r-1)]
+    for i in range(r-1): rng.append(f"H{i} + ({plus(h[:i+1])}) = n + 1")
     def ends(i):
-        t=types[i];k=f"k{i}";A=f"A{i}"
+        t=types[i];k=f"k{i}";A=f"A{i}";B=f"B{i}"
         if t=='O': return (f"{Lo[i]} + {A}",f"{Hi[i]} + {A}")
-        if t=='EL': return (f"{Lo[i]} + {A}",f"{Lo[i]} + {k} - {A}")
-        if t=='EH': return (f"{Hi[i]} + {A}",f"{Hi[i]} + {k} - {A}")
+        if t=='EL': return (f"{Lo[i]} + {A}",f"{Lo[i]} + {B}")
+        if t=='EH': return (f"{Hi[i]} + {A}",f"{Hi[i]} + {B}")
         if t=='SH': return (Hi[i],Hi[i])
         if t=='C': return (f"{Lo[i]} + s",f"{Lo[i]} + e")
     seq=[]
@@ -95,14 +96,16 @@ def chain(B):
 for j,sig in enumerate(sigs,1):
     I=info(sig); P=" ".join(I['params'])
     out.append(f"/-- Constraints of move {j}: layers {', '.join(I['types'][:-1])}. -/\ndef C{j} (n a b {P} : Nat) : Prop :=\n  "+" ∧\n  ".join(I['cons'])+"\n")
-    L=[f"set_option maxHeartbeats 0 in\ntheorem move{j} {{n a b {P} : Nat}} (h : C{j} n a b {P})\n    (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by",
-       f"  unfold C{j} at h"]
+    L=[f"set_option maxHeartbeats 1000000 in\ntheorem move{j} {{n a b {P} : Nat}} (h : C{j} n a b {P})\n    (hc : ∃ p, IsGraceful s e N p) : ∃ p, IsGraceful a b n p := by",
+       f"  unfold C{j} at h",
+       "  obtain ⟨"+", ".join(f"c{q}" for q in range(len(I['cons'])))+"⟩ := h"]
     r=I['r']; names={}
     for i,t in enumerate(I['types']):
         lo=I['Lo'][i]; hi=I['Hi'][i]
-        if t=='O': L.append(f"  obtain ⟨p{i}, h{i}⟩ := hasO (κ := k{i}) (A := A{i}) (lo := {lo}) (hi := {hi}) (by omega) (by omega)")
-        elif t=='EL': L.append(f"  obtain ⟨p{i}, h{i}⟩ := hasEL (κ := k{i}) (A := A{i}) (lo := {lo}) (hi := {hi}) (by omega) (by omega) (by omega) (by omega)")
-        elif t=='EH': L.append(f"  obtain ⟨p{i}, h{i}⟩ := hasEH (κ := k{i}) (A := A{i}) (lo := {lo}) (hi := {hi}) (by omega) (by omega) (by omega) (by omega)")
+        gg=(I['g'][i]+" + 1") if t!='C' else None
+        if t=='O': L.append(f"  obtain ⟨p{i}, h{i}⟩ := hasO' (κ := k{i}) (A := A{i}) (lo := {lo}) (hi := {hi}) (g := {gg}) (by omega) (by omega) (by omega)")
+        elif t=='EL': L.append(f"  obtain ⟨p{i}, h{i}⟩ := hasEL' (κ := k{i}) (A := A{i}) (B := B{i}) (lo := {lo}) (hi := {hi}) (g := {gg}) (by omega) (by omega) (by omega) (by omega) (by omega)")
+        elif t=='EH': L.append(f"  obtain ⟨p{i}, h{i}⟩ := hasEH' (κ := k{i}) (A := A{i}) (B := B{i}) (lo := {lo}) (hi := {hi}) (g := {gg}) (by omega) (by omega) (by omega) (by omega) (by omega)")
         elif t=='SH': L.append(f"  have h{i} := Spec.single {hi}")
         elif t=='C': L.append(f"  obtain ⟨p{i}, h{i}⟩ := core_of hc ({lo})")
     terms=[(f"h{i}" if I['ors'][jj]==0 else f"h{i}.reverse") for jj,i in enumerate(I['perm'])]
