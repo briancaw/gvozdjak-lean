@@ -127,14 +127,36 @@ for j,sig in enumerate(sigs,1):
     terms=[(f"h{i}" if I['ors'][jj]==0 else f"h{i}.reverse") for jj,i in enumerate(I['perm'])]
     ch=terms[0]
     for t in terms[1:]: ch=f"({ch}.append {t})"
-    L.append(f"  refine ⟨_, isGraceful_iff_spec.mpr ({ch}.congr (by omega) (by omega) ?_ ?_)⟩")
-    nl=r-1
+    nl=r-1; types=I['types']
+    # ends of the pieces as they appear in the Spec types
+    def ends(i):
+        t=types[i]; lo=I['Lo'][i]; hi=I['Hi'][i]
+        if t=='O': return (f"{lo} + A{i}",f"{hi} + A{i}")
+        if t=='EL': return (f"{lo} + A{i}",f"{lo} + B{i}")
+        if t=='EH': return (f"{hi} + A{i}",f"{hi} + B{i}")
+        if t=='SH': return (hi,hi)
+        if t=='C': return (f"{lo} + s",f"{lo} + e")
+    seq=[]
+    for jj,i in enumerate(I['perm']):
+        e=ends(i); seq.append(e if I['ors'][jj]==0 else (e[1],e[0]))
+    hh={'O':lambda i:f"(k{i} + 1)",'EL':lambda i:f"k{i}",'EH':lambda i:f"(k{i} + 1)",'SH':lambda i:"1"}
+    L.append(f"  have hu : {seq[0][0]} = a := by omega")
+    L.append(f"  have hv : {seq[-1][1]} = b := by omega")
+    L.append(f"  have fC : {I['Lo'][r-1]} + (N + 1) = {I['Hi'][nl-1]} := by omega")
+    for i in range(nl-1,0,-1):
+        L.append(f"  have fH{i} : {I['Hi'][i]} + {hh[types[i]](i)} = {I['Hi'][i-1]} := by omega")
+    L.append(f"  have fT : {I['Hi'][0]} + {hh[types[0]](0)} = n + 1 := by omega")
+    L.append(f"  have fS : n + 1 = {plus(I['size'])} := by omega")
+    for jj,(gi,sg) in enumerate(I['hops']):
+        L.append(f"  have e{jj} : adiff ({seq[jj][1]}) ({seq[jj+1][0]}) = {I['g'][gi]} := by unfold adiff; omega")
+    L.append("  clear "+" ".join(f"c{q}" for q in range(len(I['cons']))))
+    L.append(f"  refine ⟨_, isGraceful_iff_spec.mpr ({ch}.congr hu hv ?_ ?_)⟩")
     Bv=[I['Lo'][i] for i in range(1,r)]+[I['Hi'][i] for i in range(nl-1,-1,-1)]+["n + 1"]
     L.append("  · intro x\n    try dsimp only\n"+chain(Bv).rstrip())
     Bd=["1"]
     for i in range(nl-1,-1,-1): Bd+=[I['g'][i], f"{I['g'][i]} + 1"]
     Bd.append("n + 1")
-    L.append("  · intro x\n    simp only [adiff]\n"+chain(Bd).rstrip())
+    L.append("  · intro x\n    try dsimp only\n"+chain(Bd).rstrip())
     out.append("\n".join(L)+"\n")
 # Red
 if len(ONLY)<15:
