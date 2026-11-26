@@ -5,7 +5,7 @@ import Gvozdjak.Moves
 
 namespace Gvozdjak
 
-set_option maxHeartbeats 0
+set_option maxHeartbeats 400000
 
 theorem p00_2 (n a b q x y : Nat) (Q X Y : Int) (hQ : Q = q) (hX : X = x) (hY : Y = y)
     (hn : n = 4 * q + 0) (ha : a = 2 * x + 0) (hb : b = 2 * y + 0)
