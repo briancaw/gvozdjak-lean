@@ -34,6 +34,7 @@ For `n >= 1`, one exists starting at `a` and ending at `b` if and only if
 | `Reduction00.lean` ... `Reduction31.lean`, `Reduction.lean` | For `n >= 42`, explicit parameters showing that one of the moves applies, by residue class of `(n mod 4, a mod 2)`. Generated. |
 | `Necessity.lean` | The three conditions are necessary. |
 | `Main.lean` | The theorem, and the axiom check. |
+| `Textbook.lean` | The same theorem restated with functions on `Fin (n+1)` and integer arithmetic, derived from the main theorem. |
 | `BaseCases.lean` | The 39 labelings from the paper's appendix (not needed by the proof). |
 
 The generated files are produced by the Python scripts in `scripts/`. The integer set
