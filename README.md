@@ -42,7 +42,7 @@ re-checked by Lean, so the scripts are not part of the trusted base.
 
 ## Building
 
-Core Lean only, no Mathlib: `lake build` (Lean 4.33; about 25 minutes, mostly linear
+Core Lean only, no Mathlib: `lake build` (Lean 4.33.1; about 25 minutes, mostly linear
 arithmetic).
 
 ## Acknowledgement
